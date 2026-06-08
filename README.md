@@ -84,4 +84,4 @@ When a GitHub Issue is opened, `.github/workflows/issue-to-task.yml` runs automa
 
 Duplicate imports are prevented by using the issue number as the task id, such as `issue-1`.
 
-_Last generated: 2026-06-08T17:46:24.468Z_
+_Last generated: 2026-06-08T18:01:08.575Z_
