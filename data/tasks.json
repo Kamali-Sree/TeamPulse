@@ -17,7 +17,9 @@
       "description": "/join",
       "createdBy": "kamali-sree",
       "createdAt": "2026-06-08T18:18:53.677Z",
-      "participants": [],
+      "participants": [
+        "kamali-sree"
+      ],
       "completedBy": [],
       "status": "pending",
       "source": "github_issue"
