@@ -1,6 +1,17 @@
 {
   "tasks": [
     {
+      "id": "issue-2",
+      "title": "Learn FastAPI",
+      "description": "Need to learn FastAPI CRUD operations.",
+      "createdBy": "kamali-sree",
+      "createdAt": "2026-06-08T18:02:18.179Z",
+      "participants": [],
+      "completedBy": [],
+      "status": "pending",
+      "source": "github_issue"
+    },
+    {
       "id": "task-1780940129242",
       "title": "Learn React",
       "slug": "learn-react",
