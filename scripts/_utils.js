@@ -128,20 +128,13 @@ function findTask(tasksData, taskRef) {
 }
 
 function taskStatus(task) {
-  const participants = new Set(task.participants || []);
   const completedBy = new Set(task.completedBy || []);
 
-  if (participants.size === 0) {
-    return "pending";
+  if (completedBy.size > 0) {
+    return "completed";
   }
 
-  for (const participant of participants) {
-    if (!completedBy.has(participant)) {
-      return completedBy.size > 0 ? "in_progress" : "pending";
-    }
-  }
-
-  return "completed";
+  return "pending";
 }
 
 function normalizeTasks(data) {

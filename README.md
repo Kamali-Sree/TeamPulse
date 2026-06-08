@@ -6,23 +6,21 @@ A GitHub-based collaborative task tracker that stores team activity in JSON file
 
 | Metric | Count |
 | --- | ---: |
-| Total Tasks | 3 |
+| Total Tasks | 1 |
 | Completed Tasks | 0 |
-| Pending Tasks | 3 |
+| Pending Tasks | 1 |
 
 ## Tasks
 
-| Task | Status | Due Date | Contributors | Completed By |
-| --- | --- | --- | --- | --- |
-| Learn FastAPI | Pending | - | - | - |
-| Learn Node.js | Pending | - | - | - |
-| Learn React | Pending | - | - | - |
+| Task | Status | Participants | Completed By |
+| --- | --- | --- | --- |
+| Learn React | Pending | - | - |
 
 ## Contributor Statistics
 
 | Contributor | Joined Tasks | Completed Tasks |
 | --- | ---: | ---: |
-| [@kamali-sree](https://github.com/kamali-sree) | 0 | 0 |
+| No contributors yet | 0 | 0 |
 
 ## Usage
 
@@ -50,6 +48,13 @@ Import a GitHub Issue as a task locally:
 npm run issue-to-task -- --number 1 --title "Bug: dashboard count is wrong" --body "Pending tasks are miscounted" --user octocat
 ```
 
+Handle an issue comment command locally:
+
+```bash
+npm run handle-comment -- --issue 1 --body /join --user octocat
+npm run handle-comment -- --issue 1 --body /complete --user octocat
+```
+
 Regenerate this dashboard:
 
 ```bash
@@ -62,6 +67,7 @@ npm run update-readme
 .
 |-- .github/workflows/update-readme.yml
 |-- .github/workflows/issue-to-task.yml
+|-- .github/workflows/comment-commands.yml
 |-- data/
 |   |-- tasks.json
 |   `-- users.json
@@ -71,6 +77,7 @@ npm run update-readme
 |   |-- join_task.js
 |   |-- complete_task.js
 |   |-- issue_to_task.js
+|   |-- handle_comment_command.js
 |   `-- update_readme.js
 |-- package.json
 `-- README.md
@@ -86,4 +93,13 @@ When a GitHub Issue is opened, `.github/workflows/issue-to-task.yml` runs automa
 
 Duplicate imports are prevented by using the issue number as the task id, such as `issue-1`.
 
-_Last generated: 2026-06-08T18:18:53.725Z_
+## Comment Commands
+
+TeamPulse supports two GitHub Issue comment commands:
+
+- `/join` adds the commenter to the matching task's `participants` list.
+- `/complete` adds the commenter to `completedBy` and marks the task as completed.
+
+The `.github/workflows/comment-commands.yml` workflow runs whenever a new issue comment is created. It ignores pull request comments, unsupported commands, duplicate joins, duplicate completions, and comments on issues that do not have a matching `issue-N` task.
+
+_Last generated: 2026-06-08T18:15:06.807Z_

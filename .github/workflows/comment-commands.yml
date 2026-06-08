@@ -1,0 +1,35 @@
+name: TeamPulse Comment Commands
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: read
+
+jobs:
+  handle-comment-command:
+    if: github.event.issue.pull_request == null
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Handle TeamPulse comment command
+        run: node scripts/handle_comment_command.js
+
+      - name: Regenerate README dashboard
+        run: node scripts/update_readme.js
+
+      - name: Commit task participation update
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update TeamPulse task from issue comment"
+          file_pattern: README.md data/tasks.json data/users.json

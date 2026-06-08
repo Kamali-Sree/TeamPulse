@@ -94,14 +94,13 @@ function buildReadme(tasksData, usersData) {
           return [
             escapeMarkdown(task.title),
             statusIcon(task.status),
-            escapeMarkdown(task.dueDate || "-"),
             formatList(task.participants),
             formatList(task.completedBy)
           ].join(" | ");
         })
         .map((row) => `| ${row} |`)
         .join("\n")
-    : "| No tasks yet | - | - | - | - |";
+    : "| No tasks yet | - | - | - |";
 
   const contributorRows = contributorStats.length
     ? contributorStats
@@ -125,8 +124,8 @@ A GitHub-based collaborative task tracker that stores team activity in JSON file
 
 ## Tasks
 
-| Task | Status | Due Date | Contributors | Completed By |
-| --- | --- | --- | --- | --- |
+| Task | Status | Participants | Completed By |
+| --- | --- | --- | --- |
 ${taskRows}
 
 ## Contributor Statistics
@@ -161,6 +160,13 @@ Import a GitHub Issue as a task locally:
 npm run issue-to-task -- --number 1 --title "Bug: dashboard count is wrong" --body "Pending tasks are miscounted" --user octocat
 \`\`\`
 
+Handle an issue comment command locally:
+
+\`\`\`bash
+npm run handle-comment -- --issue 1 --body /join --user octocat
+npm run handle-comment -- --issue 1 --body /complete --user octocat
+\`\`\`
+
 Regenerate this dashboard:
 
 \`\`\`bash
@@ -173,6 +179,7 @@ npm run update-readme
 .
 |-- .github/workflows/update-readme.yml
 |-- .github/workflows/issue-to-task.yml
+|-- .github/workflows/comment-commands.yml
 |-- data/
 |   |-- tasks.json
 |   \`-- users.json
@@ -182,6 +189,7 @@ npm run update-readme
 |   |-- join_task.js
 |   |-- complete_task.js
 |   |-- issue_to_task.js
+|   |-- handle_comment_command.js
 |   \`-- update_readme.js
 |-- package.json
 \`-- README.md
@@ -196,6 +204,15 @@ Tasks live in \`data/tasks.json\` and users live in \`data/users.json\`. Each ta
 When a GitHub Issue is opened, \`.github/workflows/issue-to-task.yml\` runs automatically. It reads the issue title, body, number, and creator from the GitHub event payload, creates a \`source: "github_issue"\` task in \`data/tasks.json\`, regenerates this README, and commits the updated files back to the repository.
 
 Duplicate imports are prevented by using the issue number as the task id, such as \`issue-1\`.
+
+## Comment Commands
+
+TeamPulse supports two GitHub Issue comment commands:
+
+- \`/join\` adds the commenter to the matching task's \`participants\` list.
+- \`/complete\` adds the commenter to \`completedBy\` and marks the task as completed.
+
+The \`.github/workflows/comment-commands.yml\` workflow runs whenever a new issue comment is created. It ignores pull request comments, unsupported commands, duplicate joins, duplicate completions, and comments on issues that do not have a matching \`issue-N\` task.
 
 _Last generated: ${generatedAt}_
 `;
