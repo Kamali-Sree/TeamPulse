@@ -6,15 +6,16 @@ A GitHub-based collaborative task tracker that stores team activity in JSON file
 
 | Metric | Count |
 | --- | ---: |
-| Total Tasks | 2 |
+| Total Tasks | 3 |
 | Completed Tasks | 0 |
-| Pending Tasks | 2 |
+| Pending Tasks | 3 |
 
 ## Tasks
 
 | Task | Status | Due Date | Contributors | Completed By |
 | --- | --- | --- | --- | --- |
 | Learn FastAPI | Pending | - | - | - |
+| Learn Node.js | Pending | - | - | - |
 | Learn React | Pending | - | - | - |
 
 ## Contributor Statistics
@@ -85,4 +86,4 @@ When a GitHub Issue is opened, `.github/workflows/issue-to-task.yml` runs automa
 
 Duplicate imports are prevented by using the issue number as the task id, such as `issue-1`.
 
-_Last generated: 2026-06-08T18:02:18.238Z_
+_Last generated: 2026-06-08T18:18:53.725Z_
