@@ -1,3 +1,16 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "id": "task-1780940129242",
+      "title": "Learn React",
+      "slug": "learn-react",
+      "description": "",
+      "createdBy": "",
+      "createdAt": "2026-06-08T17:35:29.242Z",
+      "dueDate": "",
+      "participants": [],
+      "completedBy": [],
+      "status": "pending"
+    }
+  ]
 }

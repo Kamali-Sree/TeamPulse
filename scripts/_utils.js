@@ -115,10 +115,14 @@ function ensureUser(usersData, username) {
 function findTask(tasksData, taskRef) {
   const normalizedRef = String(taskRef || "").trim().toLowerCase();
   return tasksData.tasks.find((task) => {
+    const taskId = String(task.id || "").toLowerCase();
+    const taskSlug = String(task.slug || "").toLowerCase();
+    const taskTitle = String(task.title || "").toLowerCase();
+
     return (
-      task.id.toLowerCase() === normalizedRef ||
-      task.slug.toLowerCase() === normalizedRef ||
-      task.title.toLowerCase() === normalizedRef
+      taskId === normalizedRef ||
+      taskSlug === normalizedRef ||
+      taskTitle === normalizedRef
     );
   });
 }

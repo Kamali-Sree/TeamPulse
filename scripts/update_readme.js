@@ -31,6 +31,13 @@ function statusIcon(status) {
   return "Pending";
 }
 
+function escapeMarkdown(value) {
+  return String(value || "")
+    .replace(/\\/g, "\\\\")
+    .replace(/\|/g, "\\|")
+    .replace(/\r?\n/g, " ");
+}
+
 function buildContributorStats(tasks, users) {
   const stats = new Map();
 
@@ -85,9 +92,9 @@ function buildReadme(tasksData, usersData) {
     ? tasks
         .map((task) => {
           return [
-            task.title,
+            escapeMarkdown(task.title),
             statusIcon(task.status),
-            task.dueDate || "-",
+            escapeMarkdown(task.dueDate || "-"),
             formatList(task.participants),
             formatList(task.completedBy)
           ].join(" | ");
@@ -148,6 +155,12 @@ Complete a task:
 npm run complete-task -- octocat write-sprint-notes
 \`\`\`
 
+Import a GitHub Issue as a task locally:
+
+\`\`\`bash
+npm run issue-to-task -- --number 1 --title "Bug: dashboard count is wrong" --body "Pending tasks are miscounted" --user octocat
+\`\`\`
+
 Regenerate this dashboard:
 
 \`\`\`bash
@@ -159,6 +172,7 @@ npm run update-readme
 \`\`\`text
 .
 |-- .github/workflows/update-readme.yml
+|-- .github/workflows/issue-to-task.yml
 |-- data/
 |   |-- tasks.json
 |   \`-- users.json
@@ -167,6 +181,7 @@ npm run update-readme
 |   |-- create_task.js
 |   |-- join_task.js
 |   |-- complete_task.js
+|   |-- issue_to_task.js
 |   \`-- update_readme.js
 |-- package.json
 \`-- README.md
@@ -175,6 +190,12 @@ npm run update-readme
 ## Data Model
 
 Tasks live in \`data/tasks.json\` and users live in \`data/users.json\`. Each task tracks participants and the users who completed it, which mirrors the lightweight JSON-first architecture used by GitHub habit tracker repositories.
+
+## GitHub Issue Integration
+
+When a GitHub Issue is opened, \`.github/workflows/issue-to-task.yml\` runs automatically. It reads the issue title, body, number, and creator from the GitHub event payload, creates a \`source: "github_issue"\` task in \`data/tasks.json\`, regenerates this README, and commits the updated files back to the repository.
+
+Duplicate imports are prevented by using the issue number as the task id, such as \`issue-1\`.
 
 _Last generated: ${generatedAt}_
 `;
