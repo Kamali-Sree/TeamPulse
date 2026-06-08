@@ -12,19 +12,6 @@
       "source": "github_issue"
     },
     {
-      "id": "issue-3",
-      "title": "Learn Node.js",
-      "description": "/join",
-      "createdBy": "kamali-sree",
-      "createdAt": "2026-06-08T18:18:53.677Z",
-      "participants": [
-        "kamali-sree"
-      ],
-      "completedBy": [],
-      "status": "pending",
-      "source": "github_issue"
-    },
-    {
       "id": "task-1780940129242",
       "title": "Learn React",
       "slug": "learn-react",
@@ -35,6 +22,21 @@
       "participants": [],
       "completedBy": [],
       "status": "pending"
+    },
+    {
+      "id": "issue-3",
+      "title": "Learn Node.js",
+      "description": "/join",
+      "createdBy": "kamali-sree",
+      "createdAt": "2026-06-08T18:18:53.677Z",
+      "participants": [
+        "kamali-sree"
+      ],
+      "completedBy": [
+        "kamali-sree"
+      ],
+      "status": "completed",
+      "source": "github_issue"
     }
   ]
 }

@@ -7,22 +7,22 @@ A GitHub-based collaborative task tracker that stores team activity in JSON file
 | Metric | Count |
 | --- | ---: |
 | Total Tasks | 3 |
-| Completed Tasks | 0 |
-| Pending Tasks | 3 |
+| Completed Tasks | 1 |
+| Pending Tasks | 2 |
 
 ## Tasks
 
 | Task | Status | Participants | Completed By |
 | --- | --- | --- | --- |
 | Learn FastAPI | Pending | - | - |
-| Learn Node.js | Pending | [@kamali-sree](https://github.com/kamali-sree) | - |
 | Learn React | Pending | - | - |
+| Learn Node.js | Done | [@kamali-sree](https://github.com/kamali-sree) | [@kamali-sree](https://github.com/kamali-sree) |
 
 ## Contributor Statistics
 
 | Contributor | Joined Tasks | Completed Tasks |
 | --- | ---: | ---: |
-| [@kamali-sree](https://github.com/kamali-sree) | 1 | 0 |
+| [@kamali-sree](https://github.com/kamali-sree) | 1 | 1 |
 
 ## Usage
 
@@ -104,4 +104,4 @@ TeamPulse supports two GitHub Issue comment commands:
 
 The `.github/workflows/comment-commands.yml` workflow runs whenever a new issue comment is created. It ignores pull request comments, unsupported commands, duplicate joins, duplicate completions, and comments on issues that do not have a matching `issue-N` task.
 
-_Last generated: 2026-06-08T18:26:21.141Z_
+_Last generated: 2026-06-08T18:28:09.286Z_
