@@ -1,0 +1,21 @@
+{
+  "name": "teampulse",
+  "version": "1.0.0",
+  "description": "A GitHub-based collaborative task tracker powered by JSON files and README dashboards.",
+  "main": "scripts/update_readme.js",
+  "scripts": {
+    "create-task": "node scripts/create_task.js",
+    "join-task": "node scripts/join_task.js",
+    "complete-task": "node scripts/complete_task.js",
+    "update-readme": "node scripts/update_readme.js"
+  },
+  "keywords": [
+    "github",
+    "tasks",
+    "dashboard",
+    "habit-tracker",
+    "collaboration"
+  ],
+  "author": "",
+  "license": "MIT"
+}

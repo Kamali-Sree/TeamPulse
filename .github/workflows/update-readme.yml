@@ -1,0 +1,32 @@
+name: Update TeamPulse README
+
+on:
+  push:
+    paths:
+      - "data/tasks.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Regenerate README dashboard
+        run: node scripts/update_readme.js
+
+      - name: Commit updated README
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update TeamPulse README dashboard"
+          file_pattern: README.md data/tasks.json
