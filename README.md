@@ -6,37 +6,39 @@ A GitHub-based collaborative task tracker that stores team activity in JSON file
 
 | Metric | Count |
 | --- | ---: |
-| Total Tasks | 3 |
-| Completed Tasks | 0 |
-| Pending Tasks | 3 |
+| Total Tasks | 5 |
+| Completed Tasks | 3 |
+| Pending Tasks | 2 |
 
 # 📊 Daily Analytics
 
-Total Tasks: 3
+Total Tasks: 5
 
-Completed Tasks: 0
+Completed Tasks: 3
 
-Pending Tasks: 3
+Pending Tasks: 2
 
-Completion Rate: 0%
+Completion Rate: 60%
 
-🏆 Top Contributor -
+🏆 Top Contributor [@kamali-sree](https://github.com/kamali-sree)
 
-🔥 Most Active Contributor -
+🔥 Most Active Contributor [@kamali-sree](https://github.com/kamali-sree)
 
 ## Tasks
 
 | Task | Status | Participants | Completed By |
 | --- | --- | --- | --- |
 | Learn FastAPI | Pending | - | - |
-| Learn Node.js | Pending | - | - |
 | Learn React | Pending | - | - |
+| Learn Docker | Done | - | [@kamali-sree](https://github.com/kamali-sree) |
+| Learn Kubernetes | Done | [@kamali-sree](https://github.com/kamali-sree) | [@kamali-sree](https://github.com/kamali-sree) |
+| Learn Node.js | Done | [@kamali-sree](https://github.com/kamali-sree) | [@kamali-sree](https://github.com/kamali-sree) |
 
 ## Contributor Leaderboard
 
 | Contributor | Joined Tasks | Completed Tasks |
 | --- | ---: | ---: |
-| No contributors yet | 0 | 0 |
+| [@kamali-sree](https://github.com/kamali-sree) | 2 | 3 |
 
 ## Usage
 
@@ -132,4 +134,4 @@ The `.github/workflows/comment-commands.yml` workflow runs whenever a new issue 
 
 Whenever an issue is created, a contributor joins, or a contributor completes a task, TeamPulse updates `tasks.json`, regenerates `analytics.json`, rebuilds `README.md`, and commits the synchronized dashboard data.
 
-_Last generated: 2026-06-09T19:52:50.722Z_
+_Last generated: 2026-06-09T19:59:27.056Z_
