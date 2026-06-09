@@ -7,24 +7,24 @@ A GitHub-based collaborative task tracker that stores team activity in JSON file
 | Metric | Count |
 | --- | ---: |
 | Total Tasks | 5 |
-| Completed Tasks | 2 |
-| Pending Tasks | 3 |
+| Completed Tasks | 3 |
+| Pending Tasks | 2 |
 
 ## Tasks
 
 | Task | Status | Participants | Completed By |
 | --- | --- | --- | --- |
 | Learn FastAPI | Pending | - | - |
-| Learn Kubernetes | Pending | [@kamali-sree](https://github.com/kamali-sree) | - |
 | Learn React | Pending | - | - |
 | Learn Docker | Done | - | [@kamali-sree](https://github.com/kamali-sree) |
+| Learn Kubernetes | Done | [@kamali-sree](https://github.com/kamali-sree) | [@kamali-sree](https://github.com/kamali-sree) |
 | Learn Node.js | Done | [@kamali-sree](https://github.com/kamali-sree) | [@kamali-sree](https://github.com/kamali-sree) |
 
 ## Contributor Statistics
 
 | Contributor | Joined Tasks | Completed Tasks |
 | --- | ---: | ---: |
-| [@kamali-sree](https://github.com/kamali-sree) | 2 | 2 |
+| [@kamali-sree](https://github.com/kamali-sree) | 2 | 3 |
 
 ## Usage
 
@@ -106,4 +106,4 @@ TeamPulse supports two GitHub Issue comment commands:
 
 The `.github/workflows/comment-commands.yml` workflow runs whenever a new issue comment is created. It ignores pull request comments, unsupported commands, duplicate joins, duplicate completions, and comments on issues that do not have a matching `issue-N` task.
 
-_Last generated: 2026-06-09T19:43:58.695Z_
+_Last generated: 2026-06-09T19:45:28.368Z_

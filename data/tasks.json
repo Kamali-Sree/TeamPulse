@@ -12,19 +12,6 @@
       "source": "github_issue"
     },
     {
-      "id": "issue-5",
-      "title": "Learn Kubernetes",
-      "description": "",
-      "createdBy": "kamali-sree",
-      "createdAt": "2026-06-09T19:42:14.816Z",
-      "participants": [
-        "kamali-sree"
-      ],
-      "completedBy": [],
-      "status": "pending",
-      "source": "github_issue"
-    },
-    {
       "id": "task-1780940129242",
       "title": "Learn React",
       "slug": "learn-react",
@@ -43,6 +30,21 @@
       "createdBy": "kamali-sree",
       "createdAt": "2026-06-09T19:39:19.025Z",
       "participants": [],
+      "completedBy": [
+        "kamali-sree"
+      ],
+      "status": "completed",
+      "source": "github_issue"
+    },
+    {
+      "id": "issue-5",
+      "title": "Learn Kubernetes",
+      "description": "",
+      "createdBy": "kamali-sree",
+      "createdAt": "2026-06-09T19:42:14.816Z",
+      "participants": [
+        "kamali-sree"
+      ],
       "completedBy": [
         "kamali-sree"
       ],
