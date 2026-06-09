@@ -17,7 +17,9 @@
       "description": "",
       "createdBy": "kamali-sree",
       "createdAt": "2026-06-09T19:42:14.816Z",
-      "participants": [],
+      "participants": [
+        "kamali-sree"
+      ],
       "completedBy": [],
       "status": "pending",
       "source": "github_issue"
