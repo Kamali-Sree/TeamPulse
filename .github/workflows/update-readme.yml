@@ -1,16 +1,19 @@
-name: Update TeamPulse README
+name: TeamPulse Dashboard Refresh
 
 on:
   push:
     paths:
       - "data/tasks.json"
+      - "data/analytics.json"
+      - "scripts/generate_analytics.js"
+      - "scripts/update_readme.js"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  update-readme:
+  refresh-dashboard:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,11 +25,14 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Regenerate README dashboard
-        run: node scripts/update_readme.js
+      - name: Regenerate analytics
+        run: npm run generate-analytics
 
-      - name: Commit updated README
+      - name: Regenerate README dashboard
+        run: npm run update-readme
+
+      - name: Commit dashboard refresh
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: update TeamPulse README dashboard"
-          file_pattern: README.md data/tasks.json
+          commit_message: "chore: refresh TeamPulse dashboard"
+          file_pattern: README.md data/tasks.json data/analytics.json

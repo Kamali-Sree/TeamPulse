@@ -1,4 +1,4 @@
-name: Import Issue to TeamPulse
+name: TeamPulse Issue to Task
 
 on:
   issues:
@@ -9,7 +9,7 @@ permissions:
   issues: read
 
 jobs:
-  issue-to-task:
+  import-issue:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,14 +21,17 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Import issue as task
+      - name: Import issue as TeamPulse task
         run: node scripts/issue_to_task.js
 
-      - name: Regenerate README dashboard
-        run: node scripts/update_readme.js
+      - name: Regenerate analytics
+        run: npm run generate-analytics
 
-      - name: Commit imported task and README
+      - name: Regenerate README dashboard
+        run: npm run update-readme
+
+      - name: Commit task analytics update
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: import GitHub issue to TeamPulse"
-          file_pattern: README.md data/tasks.json data/users.json
+          commit_message: "chore: import GitHub issue as TeamPulse task"
+          file_pattern: README.md data/tasks.json data/users.json data/analytics.json

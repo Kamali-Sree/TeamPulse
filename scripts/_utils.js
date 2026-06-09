@@ -5,6 +5,7 @@ const ROOT_DIR = path.join(__dirname, "..");
 const DATA_DIR = path.join(ROOT_DIR, "data");
 const TASKS_FILE = path.join(DATA_DIR, "tasks.json");
 const USERS_FILE = path.join(DATA_DIR, "users.json");
+const ANALYTICS_FILE = path.join(DATA_DIR, "analytics.json");
 const README_FILE = path.join(ROOT_DIR, "README.md");
 
 function readJson(filePath, fallback) {
@@ -37,6 +38,23 @@ function saveTasks(data) {
 function loadUsers() {
   const data = readJson(USERS_FILE, { users: [] });
   return Array.isArray(data.users) ? data : { users: [] };
+}
+
+function loadAnalytics() {
+  return readJson(ANALYTICS_FILE, {
+    totalTasks: 0,
+    completedTasks: 0,
+    pendingTasks: 0,
+    completionRate: 0,
+    totalContributors: 0,
+    topContributor: "",
+    mostActiveContributor: "",
+    contributors: {}
+  });
+}
+
+function saveAnalytics(data) {
+  writeJson(ANALYTICS_FILE, data);
 }
 
 function saveUsers(data) {
@@ -162,6 +180,7 @@ function normalizeTasks(data) {
 }
 
 module.exports = {
+  ANALYTICS_FILE,
   README_FILE,
   TASKS_FILE,
   USERS_FILE,
@@ -170,11 +189,13 @@ module.exports = {
   findTask,
   getArgValue,
   getPositionalArgs,
+  loadAnalytics,
   loadTasks,
   loadUsers,
   normalizeTasks,
   normalizeUsername,
   nowIso,
+  saveAnalytics,
   saveTasks,
   saveUsers,
   taskStatus

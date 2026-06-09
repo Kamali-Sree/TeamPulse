@@ -1,8 +1,8 @@
 const fs = require("fs");
 const {
   README_FILE,
+  loadAnalytics,
   loadTasks,
-  loadUsers,
   normalizeTasks,
   saveTasks
 } = require("./_utils");
@@ -38,54 +38,22 @@ function escapeMarkdown(value) {
     .replace(/\r?\n/g, " ");
 }
 
-function buildContributorStats(tasks, users) {
-  const stats = new Map();
-
-  for (const user of users) {
-    stats.set(user.username, {
-      username: user.username,
-      joinedTasks: 0,
-      completedTasks: 0
-    });
-  }
-
-  for (const task of tasks) {
-    for (const username of task.participants || []) {
-      if (!stats.has(username)) {
-        stats.set(username, {
-          username,
-          joinedTasks: 0,
-          completedTasks: 0
-        });
-      }
-
-      stats.get(username).joinedTasks += 1;
-    }
-
-    for (const username of task.completedBy || []) {
-      if (!stats.has(username)) {
-        stats.set(username, {
-          username,
-          joinedTasks: 0,
-          completedTasks: 0
-        });
-      }
-
-      stats.get(username).completedTasks += 1;
-    }
-  }
-
-  return Array.from(stats.values()).sort((a, b) => {
-    return b.completedTasks - a.completedTasks || a.username.localeCompare(b.username);
-  });
-}
-
-function buildReadme(tasksData, usersData) {
+function buildReadme(tasksData, analytics) {
   const tasks = normalizeTasks(tasksData).tasks;
-  const users = usersData.users || [];
-  const completedTasks = tasks.filter((task) => task.status === "completed");
-  const pendingTasks = tasks.filter((task) => task.status !== "completed");
-  const contributorStats = buildContributorStats(tasks, users);
+  const contributors = analytics.contributors || {};
+  const leaderboard = Object.entries(contributors)
+    .map(([username, stats]) => ({
+      username,
+      joinedTasks: stats.joinedTasks || 0,
+      completedTasks: stats.completedTasks || 0
+    }))
+    .sort((a, b) => {
+      return (
+        b.completedTasks - a.completedTasks ||
+        b.joinedTasks - a.joinedTasks ||
+        a.username.localeCompare(b.username)
+      );
+    });
   const generatedAt = new Date().toISOString();
 
   const taskRows = tasks.length
@@ -102,8 +70,8 @@ function buildReadme(tasksData, usersData) {
         .join("\n")
     : "| No tasks yet | - | - | - |";
 
-  const contributorRows = contributorStats.length
-    ? contributorStats
+  const contributorRows = leaderboard.length
+    ? leaderboard
         .map((stat) => {
           return `| ${formatUser(stat.username)} | ${stat.joinedTasks} | ${stat.completedTasks} |`;
         })
@@ -118,9 +86,23 @@ A GitHub-based collaborative task tracker that stores team activity in JSON file
 
 | Metric | Count |
 | --- | ---: |
-| Total Tasks | ${tasks.length} |
-| Completed Tasks | ${completedTasks.length} |
-| Pending Tasks | ${pendingTasks.length} |
+| Total Tasks | ${analytics.totalTasks} |
+| Completed Tasks | ${analytics.completedTasks} |
+| Pending Tasks | ${analytics.pendingTasks} |
+
+# 📊 Daily Analytics
+
+Total Tasks: ${analytics.totalTasks}
+
+Completed Tasks: ${analytics.completedTasks}
+
+Pending Tasks: ${analytics.pendingTasks}
+
+Completion Rate: ${analytics.completionRate}%
+
+🏆 Top Contributor ${formatUser(analytics.topContributor)}
+
+🔥 Most Active Contributor ${formatUser(analytics.mostActiveContributor)}
 
 ## Tasks
 
@@ -128,7 +110,7 @@ A GitHub-based collaborative task tracker that stores team activity in JSON file
 | --- | --- | --- | --- |
 ${taskRows}
 
-## Contributor Statistics
+## Contributor Leaderboard
 
 | Contributor | Joined Tasks | Completed Tasks |
 | --- | ---: | ---: |
@@ -173,6 +155,12 @@ Regenerate this dashboard:
 npm run update-readme
 \`\`\`
 
+Regenerate analytics:
+
+\`\`\`bash
+npm run generate-analytics
+\`\`\`
+
 ## Project Structure
 
 \`\`\`text
@@ -181,6 +169,7 @@ npm run update-readme
 |-- .github/workflows/issue-to-task.yml
 |-- .github/workflows/comment-commands.yml
 |-- data/
+|   |-- analytics.json
 |   |-- tasks.json
 |   \`-- users.json
 |-- scripts/
@@ -190,6 +179,7 @@ npm run update-readme
 |   |-- complete_task.js
 |   |-- issue_to_task.js
 |   |-- handle_comment_command.js
+|   |-- generate_analytics.js
 |   \`-- update_readme.js
 |-- package.json
 \`-- README.md
@@ -197,11 +187,15 @@ npm run update-readme
 
 ## Data Model
 
-Tasks live in \`data/tasks.json\` and users live in \`data/users.json\`. Each task tracks participants and the users who completed it, which mirrors the lightweight JSON-first architecture used by GitHub habit tracker repositories.
+Tasks live in \`data/tasks.json\`, users live in \`data/users.json\`, and daily analytics live in \`data/analytics.json\`. Each task tracks participants and the users who completed it, which powers the completion rate, top contributor, most active contributor, and contributor leaderboard.
+
+## Analytics and Contributor Insights
+
+The Daily Analytics section is generated from \`data/tasks.json\` by \`scripts/generate_analytics.js\`. It safely handles empty task lists, stores aggregate statistics in \`data/analytics.json\`, and sorts the contributor leaderboard by completed tasks descending.
 
 ## GitHub Issue Integration
 
-When a GitHub Issue is opened, \`.github/workflows/issue-to-task.yml\` runs automatically. It reads the issue title, body, number, and creator from the GitHub event payload, creates a \`source: "github_issue"\` task in \`data/tasks.json\`, regenerates this README, and commits the updated files back to the repository.
+When a GitHub Issue is opened, \`.github/workflows/issue-to-task.yml\` runs automatically. It reads the issue title, body, number, and creator from the GitHub event payload, creates a \`source: "github_issue"\` task in \`data/tasks.json\`, regenerates analytics, regenerates this README, and commits the updated files back to the repository.
 
 Duplicate imports are prevented by using the issue number as the task id, such as \`issue-1\`.
 
@@ -214,15 +208,17 @@ TeamPulse supports two GitHub Issue comment commands:
 
 The \`.github/workflows/comment-commands.yml\` workflow runs whenever a new issue comment is created. It ignores pull request comments, unsupported commands, duplicate joins, duplicate completions, and comments on issues that do not have a matching \`issue-N\` task.
 
+Whenever an issue is created, a contributor joins, or a contributor completes a task, TeamPulse updates \`tasks.json\`, regenerates \`analytics.json\`, rebuilds \`README.md\`, and commits the synchronized dashboard data.
+
 _Last generated: ${generatedAt}_
 `;
 }
 
 const tasksData = loadTasks();
-const usersData = loadUsers();
 const normalizedTasks = normalizeTasks(tasksData);
+const analytics = loadAnalytics();
 
 saveTasks(normalizedTasks);
-fs.writeFileSync(README_FILE, buildReadme(normalizedTasks, usersData));
+fs.writeFileSync(README_FILE, buildReadme(normalizedTasks, analytics));
 
 console.log("README dashboard updated.");

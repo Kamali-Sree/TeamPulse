@@ -25,11 +25,14 @@ jobs:
       - name: Handle TeamPulse comment command
         run: node scripts/handle_comment_command.js
 
+      - name: Regenerate analytics
+        run: npm run generate-analytics
+
       - name: Regenerate README dashboard
-        run: node scripts/update_readme.js
+        run: npm run update-readme
 
       - name: Commit task participation update
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: update TeamPulse task from issue comment"
-          file_pattern: README.md data/tasks.json data/users.json
+          file_pattern: README.md data/tasks.json data/users.json data/analytics.json

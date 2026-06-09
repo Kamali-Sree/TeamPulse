@@ -9,6 +9,7 @@
     "complete-task": "node scripts/complete_task.js",
     "issue-to-task": "node scripts/issue_to_task.js",
     "handle-comment": "node scripts/handle_comment_command.js",
+    "generate-analytics": "node scripts/generate_analytics.js",
     "update-readme": "node scripts/update_readme.js"
   },
   "keywords": [
