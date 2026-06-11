@@ -1,58 +1,80 @@
 # TeamPulse
 
-A GitHub-based collaborative task tracker that stores team activity in JSON files and regenerates this README as a living dashboard.
+![Dashboard](https://img.shields.io/badge/dashboard-auto--generated-blue)
+![Data](https://img.shields.io/badge/data-JSON-green)
+![Automation](https://img.shields.io/badge/GitHub%20Actions-enabled-black)
+
+TeamPulse is a GitHub-native task tracking dashboard that turns issues and issue comments into structured JSON data, analytics, trend reports, and an automatically refreshed README.
+
+## Features
+
+- Task Creation & Tracking
+- Contributor Participation
+- Auto-generated Analytics Dashboard
+- GitHub Issue Integration
+- Issue Comment Commands
+- Daily Archival System
+- Weekly & Monthly Trend Analysis
+- Contributor Leaderboards
+- Automated README Updates
+
+---
 
 ## Dashboard
 
-| Metric | Count |
+| Metric | Value |
 | --- | ---: |
 | Total Tasks | 5 |
 | Completed Tasks | 3 |
 | Pending Tasks | 2 |
+| Completion Rate | 60% |
 
-# 📊 Daily Analytics
+---
 
-Total Tasks: 5
+## 📊 Daily Analytics
 
-Completed Tasks: 3
+| Metric | Value |
+| --- | --- |
+| Total Tasks | 5 |
+| Completed Tasks | 3 |
+| Pending Tasks | 2 |
+| Completion Rate | 60% |
+| Top Contributor | [@kamali-sree](https://github.com/kamali-sree) |
+| Most Active Contributor | [@kamali-sree](https://github.com/kamali-sree) |
 
-Pending Tasks: 2
-
-Completion Rate: 60%
-
-🏆 Top Contributor [@kamali-sree](https://github.com/kamali-sree)
-
-🔥 Most Active Contributor [@kamali-sree](https://github.com/kamali-sree)
+---
 
 ## 🚨 Priority Overview
 
-Critical Tasks: 0
+| Priority | Count |
+| --- | ---: |
+| Critical | 0 |
+| High | 0 |
+| Medium | 5 |
+| Low | 0 |
 
-High Tasks: 0
+### 📊 Task Distribution
 
-Medium Tasks: 5
+```text
+Critical | -
+High     | -
+Medium   | █████
+Low      | -
+```
 
-Low Tasks: 0
-
-## 📊 Task Distribution
-
-Critical: -
-
-High: -
-
-Medium: █████
-
-Low: -
+---
 
 ## Tasks
 
 | Task | Priority | Status | Participants |
 | --- | --- | --- | --- |
-| Learn FastAPI | Medium | Pending | - |
-| Learn React | Medium | Pending | - |
-| Learn Docker | Medium | Done | - |
-| Learn Kubernetes | Medium | Done | [@kamali-sree](https://github.com/kamali-sree) |
-| Learn Node.js | Medium | Done | [@kamali-sree](https://github.com/kamali-sree) |
+| Learn FastAPI | Medium | **Pending** | - |
+| Learn React | Medium | **Pending** | - |
+| Learn Docker | Medium | **Done** | - |
+| Learn Kubernetes | Medium | **Done** | [@kamali-sree](https://github.com/kamali-sree) |
+| Learn Node.js | Medium | **Done** | [@kamali-sree](https://github.com/kamali-sree) |
+
+---
 
 ## Contributor Leaderboard
 
@@ -60,37 +82,33 @@ Low: -
 | --- | ---: | ---: |
 | [@kamali-sree](https://github.com/kamali-sree) | 2 | 3 |
 
+---
+
 ## 📈 Weekly Trends
 
-Tasks Completed This Week: 3
-
-Tasks Created This Week: 5
-
-Average Weekly Completion Rate: 60%
-
-Critical Tasks Completed This Week: 0
-
-High Priority Completion Rate: 0%
-
-Most Common Priority: Medium
-
-Best Day: 2026-06-11 (60%)
-
-Worst Day: 2026-06-11 (60%)
+| Metric | Value |
+| --- | ---: |
+| Tasks Completed This Week | 3 |
+| Tasks Created This Week | 5 |
+| Average Weekly Completion Rate | 60% |
+| Critical Tasks Completed This Week | 0 |
+| High Priority Completion Rate | 0% |
+| Most Common Priority | Medium |
+| Best Day | 2026-06-11 (60%) |
+| Worst Day | 2026-06-11 (60%) |
 
 ## 📊 Monthly Trends
 
-Tasks Completed This Month: 3
+| Metric | Value |
+| --- | ---: |
+| Tasks Completed This Month | 3 |
+| Tasks Created This Month | 5 |
+| Average Monthly Completion Rate | 60% |
+| Critical Tasks Completed This Month | 0 |
+| High Priority Completion Rate | 0% |
+| Most Common Priority | Medium |
 
-Tasks Created This Month: 5
-
-Average Monthly Completion Rate: 60%
-
-Critical Tasks Completed This Month: 0
-
-High Priority Completion Rate: 0%
-
-Most Common Priority: Medium
+---
 
 ## 🏆 Weekly Champions
 
@@ -104,97 +122,29 @@ Most Common Priority: Medium
 | --- | ---: | ---: |
 | [@kamali-sree](https://github.com/kamali-sree) | 2 | 3 |
 
+---
+
 ## 📅 Yesterday's Summary
 
-Date: 2026-06-11
-
-Tasks Completed: 3
-
-Pending Tasks: 2
-
-Completion Rate: 60%
-
-🏆 Top Contributor
-[@kamali-sree](https://github.com/kamali-sree)
-
-🔥 Most Active Contributor
-[@kamali-sree](https://github.com/kamali-sree)
+| Metric | Value |
+| --- | --- |
+| Date | 2026-06-11 |
+| Tasks Completed | 3 |
+| Pending Tasks | 2 |
+| Completion Rate | 60% |
+| Top Contributor | [@kamali-sree](https://github.com/kamali-sree) |
+| Most Active Contributor | [@kamali-sree](https://github.com/kamali-sree) |
 
 ## 📚 Historical Reports
 
-Total Archived Days: 1
+| Metric | Value |
+| --- | --- |
+| Total Archived Days | 1 |
+| Latest Archive | 2026-06-11 |
+| Best Day | 2026-06-11 (60%) |
+| Worst Day | 2026-06-11 (60%) |
 
-Latest Archive:
-2026-06-11
-
-Best Day:
-2026-06-11 (60%)
-
-Worst Day:
-2026-06-11 (60%)
-
-## Usage
-
-Create a common task:
-
-```bash
-npm run create-task -- "Write sprint notes" --description "Summarize this week's work" --due 2026-06-30 --created-by octocat
-```
-
-Join a task:
-
-```bash
-npm run join-task -- octocat write-sprint-notes
-```
-
-Complete a task:
-
-```bash
-npm run complete-task -- octocat write-sprint-notes
-```
-
-Import a GitHub Issue as a task locally:
-
-```bash
-npm run issue-to-task -- --number 1 --title "Bug: dashboard count is wrong" --body "Pending tasks are miscounted" --user octocat --labels Critical
-```
-
-Handle an issue comment command locally:
-
-```bash
-npm run handle-comment -- --issue 1 --body /join --user octocat
-npm run handle-comment -- --issue 1 --body /complete --user octocat
-```
-
-Regenerate analytics:
-
-```bash
-npm run generate-analytics
-```
-
-Regenerate trend analytics:
-
-```bash
-npm run generate-trends
-```
-
-Regenerate this dashboard:
-
-```bash
-npm run update-readme
-```
-
-Archive the current day:
-
-```bash
-npm run archive-day
-```
-
-Reset tasks for a fresh day:
-
-```bash
-npm run reset-day
-```
+---
 
 ## Project Structure
 
@@ -227,25 +177,25 @@ npm run reset-day
 `-- README.md
 ```
 
+---
+
 ## Data Model
 
 Tasks live in `data/tasks.json`, users live in `data/users.json`, daily analytics live in `data/analytics.json`, trend analytics live in `data/trends.json`, and daily history snapshots live in `data/history/YYYY-MM-DD.json`. Every task has a normalized `priority` value.
 
 ## Analytics and Contributor Insights
 
-The Daily Analytics section is generated from `data/tasks.json` by `scripts/generate_analytics.js`. It safely handles empty task lists, stores aggregate statistics in `data/analytics.json`, and sorts the contributor leaderboard by completed tasks descending.
+The Daily Analytics section is generated from `data/tasks.json` by `scripts/generate_analytics.js`. It safely handles empty task lists, stores aggregate statistics in `data/analytics.json`, and sorts contributor leaderboards by completed tasks descending.
 
 ## Priority Labels
 
 TeamPulse reads GitHub Issue labels when an issue is imported and maps `Critical`, `High`, `Medium`, and `Low` labels to task priorities. Supported priority values are `critical`, `high`, `medium`, and `low`; missing or unknown values are stored as `medium`.
 
-Priorities affect the task table, the Priority Overview, the markdown task distribution bars, and trend analytics such as critical tasks completed, high-priority completion rate, and most common priority.
+Priorities affect the task table, Priority Overview, task distribution bars, and trend analytics such as critical tasks completed, high-priority completion rate, and most common priority.
 
 ## Weekly and Monthly Trends
 
 `scripts/generate_trends.js` reads every `data/history/YYYY-MM-DD.json` file, calculates rolling 7-day and 30-day trend summaries, and writes them to `data/trends.json`. It handles empty history folders, first-week projects, and first-month projects by returning zeroed statistics until more history exists.
-
-Trend leaderboards are sorted by completed tasks descending, with joined tasks and username used as stable tie-breakers.
 
 ## Daily Archives and Reset
 
@@ -255,13 +205,9 @@ TeamPulse stores immutable daily snapshots in `data/history/YYYY-MM-DD.json`. Ea
 
 `scripts/reset_tasks.js` archives the current day first, clears `data/tasks.json` to `{ "tasks": [] }`, regenerates `data/analytics.json`, and rebuilds this README so the next day starts fresh.
 
-The `.github/workflows/daily-reset.yml` workflow runs every day at 00:00 UTC and can also be tested manually from the GitHub Actions tab with `workflow_dispatch`.
-
 ## GitHub Issue Integration
 
-When a GitHub Issue is opened, `.github/workflows/issue-to-task.yml` runs automatically. It reads the issue title, body, number, and creator from the GitHub event payload, creates a `source: "github_issue"` task in `data/tasks.json`, regenerates analytics, regenerates this README, and commits the updated files back to the repository.
-
-Duplicate imports are prevented by using the issue number as the task id, such as `issue-1`.
+When a GitHub Issue is opened, `.github/workflows/issue-to-task.yml` reads the issue title, body, number, creator, and supported priority labels, then creates a `source: "github_issue"` task in `data/tasks.json`. Duplicate imports are prevented by using the issue number as the task id, such as `issue-1`.
 
 ## Comment Commands
 
@@ -270,8 +216,6 @@ TeamPulse supports two GitHub Issue comment commands:
 - `/join` adds the commenter to the matching task's `participants` list.
 - `/complete` adds the commenter to `completedBy` and marks the task as completed.
 
-The `.github/workflows/comment-commands.yml` workflow runs whenever a new issue comment is created. It ignores pull request comments, unsupported commands, duplicate joins, duplicate completions, and comments on issues that do not have a matching `issue-N` task.
+The `.github/workflows/comment-commands.yml` workflow ignores pull request comments, unsupported commands, duplicate joins, duplicate completions, and comments on issues that do not have a matching `issue-N` task.
 
-Whenever an issue is created, a contributor joins, or a contributor completes a task, TeamPulse updates `tasks.json`, regenerates `analytics.json`, rebuilds `README.md`, and commits the synchronized dashboard data.
-
-_Last generated: 2026-06-11T17:42:11.540Z_
+_Last generated: 2026-06-11T17:50:14.805Z_

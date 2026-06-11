@@ -23,16 +23,16 @@ function formatList(values) {
   return values.map(formatUser).join(", ");
 }
 
-function statusIcon(status) {
+function formatStatus(status) {
   if (status === "completed") {
-    return "Done";
+    return "**Done**";
   }
 
   if (status === "in_progress") {
-    return "Active";
+    return "**Active**";
   }
 
-  return "Pending";
+  return "**Pending**";
 }
 
 function escapeMarkdown(value) {
@@ -43,7 +43,7 @@ function escapeMarkdown(value) {
 }
 
 function priorityBar(count) {
-  return count > 0 ? "█".repeat(count) : "-";
+  return count > 0 ? "\u2588".repeat(count) : "-";
 }
 
 function readHistorySnapshots() {
@@ -111,7 +111,7 @@ function buildLeaderboard(contributors) {
     });
 }
 
-function buildLeaderboardRows(leaderboard) {
+function buildContributorRows(leaderboard) {
   return leaderboard.length
     ? leaderboard
         .map((stat) => {
@@ -141,7 +141,7 @@ function buildReadme(tasksData, analytics, trends) {
           return [
             escapeMarkdown(task.title),
             formatPriority(task.priority),
-            statusIcon(task.status),
+            formatStatus(task.status),
             formatList(task.participants)
           ].join(" | ");
         })
@@ -149,55 +149,75 @@ function buildReadme(tasksData, analytics, trends) {
         .join("\n")
     : "| No tasks yet | - | - | - |";
 
-  const contributorRows = buildLeaderboardRows(leaderboard);
-  const weeklyRows = buildLeaderboardRows(weeklyLeaderboard);
-  const allTimeRows = buildLeaderboardRows(allTimeLeaderboard);
+  const contributorRows = buildContributorRows(leaderboard);
+  const weeklyRows = buildContributorRows(weeklyLeaderboard);
+  const allTimeRows = buildContributorRows(allTimeLeaderboard);
 
   return `# TeamPulse
 
-A GitHub-based collaborative task tracker that stores team activity in JSON files and regenerates this README as a living dashboard.
+![Dashboard](https://img.shields.io/badge/dashboard-auto--generated-blue)
+![Data](https://img.shields.io/badge/data-JSON-green)
+![Automation](https://img.shields.io/badge/GitHub%20Actions-enabled-black)
+
+TeamPulse is a GitHub-native task tracking dashboard that turns issues and issue comments into structured JSON data, analytics, trend reports, and an automatically refreshed README.
+
+## Features
+
+- Task Creation & Tracking
+- Contributor Participation
+- Auto-generated Analytics Dashboard
+- GitHub Issue Integration
+- Issue Comment Commands
+- Daily Archival System
+- Weekly & Monthly Trend Analysis
+- Contributor Leaderboards
+- Automated README Updates
+
+---
 
 ## Dashboard
 
-| Metric | Count |
+| Metric | Value |
 | --- | ---: |
 | Total Tasks | ${analytics.totalTasks} |
 | Completed Tasks | ${analytics.completedTasks} |
 | Pending Tasks | ${analytics.pendingTasks} |
+| Completion Rate | ${analytics.completionRate}% |
 
-# 📊 Daily Analytics
+---
 
-Total Tasks: ${analytics.totalTasks}
+## 📊 Daily Analytics
 
-Completed Tasks: ${analytics.completedTasks}
+| Metric | Value |
+| --- | --- |
+| Total Tasks | ${analytics.totalTasks} |
+| Completed Tasks | ${analytics.completedTasks} |
+| Pending Tasks | ${analytics.pendingTasks} |
+| Completion Rate | ${analytics.completionRate}% |
+| Top Contributor | ${formatUser(analytics.topContributor)} |
+| Most Active Contributor | ${formatUser(analytics.mostActiveContributor)} |
 
-Pending Tasks: ${analytics.pendingTasks}
-
-Completion Rate: ${analytics.completionRate}%
-
-🏆 Top Contributor ${formatUser(analytics.topContributor)}
-
-🔥 Most Active Contributor ${formatUser(analytics.mostActiveContributor)}
+---
 
 ## 🚨 Priority Overview
 
-Critical Tasks: ${analytics.criticalTasks || 0}
+| Priority | Count |
+| --- | ---: |
+| Critical | ${analytics.criticalTasks || 0} |
+| High | ${analytics.highTasks || 0} |
+| Medium | ${analytics.mediumTasks || 0} |
+| Low | ${analytics.lowTasks || 0} |
 
-High Tasks: ${analytics.highTasks || 0}
+### 📊 Task Distribution
 
-Medium Tasks: ${analytics.mediumTasks || 0}
+\`\`\`text
+Critical | ${priorityBar(analytics.criticalTasks || 0)}
+High     | ${priorityBar(analytics.highTasks || 0)}
+Medium   | ${priorityBar(analytics.mediumTasks || 0)}
+Low      | ${priorityBar(analytics.lowTasks || 0)}
+\`\`\`
 
-Low Tasks: ${analytics.lowTasks || 0}
-
-## 📊 Task Distribution
-
-Critical: ${priorityBar(analytics.criticalTasks || 0)}
-
-High: ${priorityBar(analytics.highTasks || 0)}
-
-Medium: ${priorityBar(analytics.mediumTasks || 0)}
-
-Low: ${priorityBar(analytics.lowTasks || 0)}
+---
 
 ## Tasks
 
@@ -205,43 +225,41 @@ Low: ${priorityBar(analytics.lowTasks || 0)}
 | --- | --- | --- | --- |
 ${taskRows}
 
+---
+
 ## Contributor Leaderboard
 
 | Contributor | Joined Tasks | Completed Tasks |
 | --- | ---: | ---: |
 ${contributorRows}
 
+---
+
 ## 📈 Weekly Trends
 
-Tasks Completed This Week: ${weekly.tasksCompleted || 0}
-
-Tasks Created This Week: ${weekly.tasksCreated || 0}
-
-Average Weekly Completion Rate: ${weekly.averageCompletionRate || 0}%
-
-Critical Tasks Completed This Week: ${weekly.criticalTasksCompleted || 0}
-
-High Priority Completion Rate: ${weekly.highPriorityCompletionRate || 0}%
-
-Most Common Priority: ${formatPriority(weekly.mostCommonPriority)}
-
-Best Day: ${formatTrendDay(weekly.bestDay)}
-
-Worst Day: ${formatTrendDay(weekly.worstDay)}
+| Metric | Value |
+| --- | ---: |
+| Tasks Completed This Week | ${weekly.tasksCompleted || 0} |
+| Tasks Created This Week | ${weekly.tasksCreated || 0} |
+| Average Weekly Completion Rate | ${weekly.averageCompletionRate || 0}% |
+| Critical Tasks Completed This Week | ${weekly.criticalTasksCompleted || 0} |
+| High Priority Completion Rate | ${weekly.highPriorityCompletionRate || 0}% |
+| Most Common Priority | ${formatPriority(weekly.mostCommonPriority)} |
+| Best Day | ${formatTrendDay(weekly.bestDay)} |
+| Worst Day | ${formatTrendDay(weekly.worstDay)} |
 
 ## 📊 Monthly Trends
 
-Tasks Completed This Month: ${monthly.tasksCompleted || 0}
+| Metric | Value |
+| --- | ---: |
+| Tasks Completed This Month | ${monthly.tasksCompleted || 0} |
+| Tasks Created This Month | ${monthly.tasksCreated || 0} |
+| Average Monthly Completion Rate | ${monthly.averageCompletionRate || 0}% |
+| Critical Tasks Completed This Month | ${monthly.criticalTasksCompleted || 0} |
+| High Priority Completion Rate | ${monthly.highPriorityCompletionRate || 0}% |
+| Most Common Priority | ${formatPriority(monthly.mostCommonPriority)} |
 
-Tasks Created This Month: ${monthly.tasksCreated || 0}
-
-Average Monthly Completion Rate: ${monthly.averageCompletionRate || 0}%
-
-Critical Tasks Completed This Month: ${monthly.criticalTasksCompleted || 0}
-
-High Priority Completion Rate: ${monthly.highPriorityCompletionRate || 0}%
-
-Most Common Priority: ${formatPriority(monthly.mostCommonPriority)}
+---
 
 ## 🏆 Weekly Champions
 
@@ -255,97 +273,29 @@ ${weeklyRows}
 | --- | ---: | ---: |
 ${allTimeRows}
 
+---
+
 ## 📅 Yesterday's Summary
 
-Date: ${latestArchive ? latestArchive.date : "-"}
-
-Tasks Completed: ${latestArchive ? latestArchive.completedTasks : 0}
-
-Pending Tasks: ${latestArchive ? latestArchive.pendingTasks : 0}
-
-Completion Rate: ${latestArchive ? latestArchive.completionRate : 0}%
-
-🏆 Top Contributor
-${latestArchive ? formatUser(latestArchive.topContributor) : "-"}
-
-🔥 Most Active Contributor
-${latestArchive ? formatUser(latestArchive.mostActiveContributor) : "-"}
+| Metric | Value |
+| --- | --- |
+| Date | ${latestArchive ? latestArchive.date : "-"} |
+| Tasks Completed | ${latestArchive ? latestArchive.completedTasks : 0} |
+| Pending Tasks | ${latestArchive ? latestArchive.pendingTasks : 0} |
+| Completion Rate | ${latestArchive ? latestArchive.completionRate : 0}% |
+| Top Contributor | ${latestArchive ? formatUser(latestArchive.topContributor) : "-"} |
+| Most Active Contributor | ${latestArchive ? formatUser(latestArchive.mostActiveContributor) : "-"} |
 
 ## 📚 Historical Reports
 
-Total Archived Days: ${history.length}
+| Metric | Value |
+| --- | --- |
+| Total Archived Days | ${history.length} |
+| Latest Archive | ${latestArchive ? latestArchive.date : "-"} |
+| Best Day | ${formatHistoryDay(bestDay)} |
+| Worst Day | ${formatHistoryDay(worstDay)} |
 
-Latest Archive:
-${latestArchive ? latestArchive.date : "-"}
-
-Best Day:
-${formatHistoryDay(bestDay)}
-
-Worst Day:
-${formatHistoryDay(worstDay)}
-
-## Usage
-
-Create a common task:
-
-\`\`\`bash
-npm run create-task -- "Write sprint notes" --description "Summarize this week's work" --due 2026-06-30 --created-by octocat
-\`\`\`
-
-Join a task:
-
-\`\`\`bash
-npm run join-task -- octocat write-sprint-notes
-\`\`\`
-
-Complete a task:
-
-\`\`\`bash
-npm run complete-task -- octocat write-sprint-notes
-\`\`\`
-
-Import a GitHub Issue as a task locally:
-
-\`\`\`bash
-npm run issue-to-task -- --number 1 --title "Bug: dashboard count is wrong" --body "Pending tasks are miscounted" --user octocat --labels Critical
-\`\`\`
-
-Handle an issue comment command locally:
-
-\`\`\`bash
-npm run handle-comment -- --issue 1 --body /join --user octocat
-npm run handle-comment -- --issue 1 --body /complete --user octocat
-\`\`\`
-
-Regenerate analytics:
-
-\`\`\`bash
-npm run generate-analytics
-\`\`\`
-
-Regenerate trend analytics:
-
-\`\`\`bash
-npm run generate-trends
-\`\`\`
-
-Regenerate this dashboard:
-
-\`\`\`bash
-npm run update-readme
-\`\`\`
-
-Archive the current day:
-
-\`\`\`bash
-npm run archive-day
-\`\`\`
-
-Reset tasks for a fresh day:
-
-\`\`\`bash
-npm run reset-day
-\`\`\`
+---
 
 ## Project Structure
 
@@ -378,25 +328,25 @@ npm run reset-day
 \`-- README.md
 \`\`\`
 
+---
+
 ## Data Model
 
 Tasks live in \`data/tasks.json\`, users live in \`data/users.json\`, daily analytics live in \`data/analytics.json\`, trend analytics live in \`data/trends.json\`, and daily history snapshots live in \`data/history/YYYY-MM-DD.json\`. Every task has a normalized \`priority\` value.
 
 ## Analytics and Contributor Insights
 
-The Daily Analytics section is generated from \`data/tasks.json\` by \`scripts/generate_analytics.js\`. It safely handles empty task lists, stores aggregate statistics in \`data/analytics.json\`, and sorts the contributor leaderboard by completed tasks descending.
+The Daily Analytics section is generated from \`data/tasks.json\` by \`scripts/generate_analytics.js\`. It safely handles empty task lists, stores aggregate statistics in \`data/analytics.json\`, and sorts contributor leaderboards by completed tasks descending.
 
 ## Priority Labels
 
 TeamPulse reads GitHub Issue labels when an issue is imported and maps \`Critical\`, \`High\`, \`Medium\`, and \`Low\` labels to task priorities. Supported priority values are \`critical\`, \`high\`, \`medium\`, and \`low\`; missing or unknown values are stored as \`medium\`.
 
-Priorities affect the task table, the Priority Overview, the markdown task distribution bars, and trend analytics such as critical tasks completed, high-priority completion rate, and most common priority.
+Priorities affect the task table, Priority Overview, task distribution bars, and trend analytics such as critical tasks completed, high-priority completion rate, and most common priority.
 
 ## Weekly and Monthly Trends
 
 \`scripts/generate_trends.js\` reads every \`data/history/YYYY-MM-DD.json\` file, calculates rolling 7-day and 30-day trend summaries, and writes them to \`data/trends.json\`. It handles empty history folders, first-week projects, and first-month projects by returning zeroed statistics until more history exists.
-
-Trend leaderboards are sorted by completed tasks descending, with joined tasks and username used as stable tie-breakers.
 
 ## Daily Archives and Reset
 
@@ -406,13 +356,9 @@ TeamPulse stores immutable daily snapshots in \`data/history/YYYY-MM-DD.json\`. 
 
 \`scripts/reset_tasks.js\` archives the current day first, clears \`data/tasks.json\` to \`{ "tasks": [] }\`, regenerates \`data/analytics.json\`, and rebuilds this README so the next day starts fresh.
 
-The \`.github/workflows/daily-reset.yml\` workflow runs every day at 00:00 UTC and can also be tested manually from the GitHub Actions tab with \`workflow_dispatch\`.
-
 ## GitHub Issue Integration
 
-When a GitHub Issue is opened, \`.github/workflows/issue-to-task.yml\` runs automatically. It reads the issue title, body, number, and creator from the GitHub event payload, creates a \`source: "github_issue"\` task in \`data/tasks.json\`, regenerates analytics, regenerates this README, and commits the updated files back to the repository.
-
-Duplicate imports are prevented by using the issue number as the task id, such as \`issue-1\`.
+When a GitHub Issue is opened, \`.github/workflows/issue-to-task.yml\` reads the issue title, body, number, creator, and supported priority labels, then creates a \`source: "github_issue"\` task in \`data/tasks.json\`. Duplicate imports are prevented by using the issue number as the task id, such as \`issue-1\`.
 
 ## Comment Commands
 
@@ -421,9 +367,7 @@ TeamPulse supports two GitHub Issue comment commands:
 - \`/join\` adds the commenter to the matching task's \`participants\` list.
 - \`/complete\` adds the commenter to \`completedBy\` and marks the task as completed.
 
-The \`.github/workflows/comment-commands.yml\` workflow runs whenever a new issue comment is created. It ignores pull request comments, unsupported commands, duplicate joins, duplicate completions, and comments on issues that do not have a matching \`issue-N\` task.
-
-Whenever an issue is created, a contributor joins, or a contributor completes a task, TeamPulse updates \`tasks.json\`, regenerates \`analytics.json\`, rebuilds \`README.md\`, and commits the synchronized dashboard data.
+The \`.github/workflows/comment-commands.yml\` workflow ignores pull request comments, unsupported commands, duplicate joins, duplicate completions, and comments on issues that do not have a matching \`issue-N\` task.
 
 _Last generated: ${generatedAt}_
 `;
