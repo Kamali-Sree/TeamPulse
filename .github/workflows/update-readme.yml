@@ -5,7 +5,10 @@ on:
     paths:
       - "data/tasks.json"
       - "data/analytics.json"
+      - "data/trends.json"
+      - "data/history/**"
       - "scripts/generate_analytics.js"
+      - "scripts/generate_trends.js"
       - "scripts/update_readme.js"
   workflow_dispatch:
 
@@ -28,6 +31,9 @@ jobs:
       - name: Regenerate analytics
         run: npm run generate-analytics
 
+      - name: Regenerate trends
+        run: npm run generate-trends
+
       - name: Regenerate README dashboard
         run: npm run update-readme
 
@@ -35,4 +41,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: refresh TeamPulse dashboard"
-          file_pattern: README.md data/tasks.json data/analytics.json
+          file_pattern: README.md data/tasks.json data/analytics.json data/trends.json

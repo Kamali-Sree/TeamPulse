@@ -6,6 +6,7 @@ const DATA_DIR = path.join(ROOT_DIR, "data");
 const TASKS_FILE = path.join(DATA_DIR, "tasks.json");
 const USERS_FILE = path.join(DATA_DIR, "users.json");
 const ANALYTICS_FILE = path.join(DATA_DIR, "analytics.json");
+const TRENDS_FILE = path.join(DATA_DIR, "trends.json");
 const HISTORY_DIR = path.join(DATA_DIR, "history");
 const README_FILE = path.join(ROOT_DIR, "README.md");
 
@@ -56,6 +57,36 @@ function loadAnalytics() {
 
 function saveAnalytics(data) {
   writeJson(ANALYTICS_FILE, data);
+}
+
+function defaultTrends() {
+  return {
+    weekly: {
+      tasksCompleted: 0,
+      tasksCreated: 0,
+      averageCompletionRate: 0,
+      bestDay: null,
+      worstDay: null
+    },
+    monthly: {
+      tasksCompleted: 0,
+      tasksCreated: 0,
+      averageCompletionRate: 0
+    },
+    contributorTrends: {
+      weeklyLeaderboard: [],
+      monthlyLeaderboard: [],
+      allTimeLeaderboard: []
+    }
+  };
+}
+
+function loadTrends() {
+  return readJson(TRENDS_FILE, defaultTrends());
+}
+
+function saveTrends(data) {
+  writeJson(TRENDS_FILE, data);
 }
 
 function historyFileForDate(dateValue) {
@@ -193,8 +224,10 @@ module.exports = {
   HISTORY_DIR,
   README_FILE,
   TASKS_FILE,
+  TRENDS_FILE,
   USERS_FILE,
   createSlug,
+  defaultTrends,
   ensureUser,
   findTask,
   getArgValue,
@@ -202,12 +235,14 @@ module.exports = {
   historyFileForDate,
   loadAnalytics,
   loadTasks,
+  loadTrends,
   loadUsers,
   normalizeTasks,
   normalizeUsername,
   nowIso,
   saveAnalytics,
   saveTasks,
+  saveTrends,
   saveUsers,
   taskStatus,
   todayDate,

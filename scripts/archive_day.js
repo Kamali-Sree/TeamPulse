@@ -1,4 +1,5 @@
 const fs = require("fs");
+const { execFileSync } = require("child_process");
 const {
   HISTORY_DIR,
   historyFileForDate,
@@ -9,6 +10,13 @@ const {
   writeJson
 } = require("./_utils");
 const { generateAnalytics } = require("./generate_analytics");
+const { generateTrends } = require("./generate_trends");
+
+function runUpdateReadme() {
+  execFileSync(process.execPath, ["scripts/update_readme.js"], {
+    stdio: "inherit"
+  });
+}
 
 function readSnapshot(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
@@ -47,6 +55,8 @@ function archiveDay(dateValue = todayDate()) {
 
   // History is append-only by date: create the file once, then never overwrite it.
   writeJson(historyFile, snapshot);
+  generateTrends();
+  runUpdateReadme();
   console.log(`Archived TeamPulse day to ${historyFile}.`);
 
   return {
@@ -63,5 +73,6 @@ if (require.main === module) {
 module.exports = {
   archiveDay,
   buildSnapshot,
-  readSnapshot
+  readSnapshot,
+  runUpdateReadme
 };

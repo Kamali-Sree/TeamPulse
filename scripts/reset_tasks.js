@@ -2,6 +2,7 @@ const { execFileSync } = require("child_process");
 const { archiveDay } = require("./archive_day");
 const { saveTasks } = require("./_utils");
 const { generateAnalytics } = require("./generate_analytics");
+const { generateTrends } = require("./generate_trends");
 
 function runUpdateReadme() {
   execFileSync(process.execPath, ["scripts/update_readme.js"], {
@@ -18,6 +19,7 @@ function resetTasks() {
 
   saveTasks({ tasks: [] });
   generateAnalytics();
+  generateTrends();
   runUpdateReadme();
 
   console.log("TeamPulse tasks reset for a fresh day.");

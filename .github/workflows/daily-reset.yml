@@ -27,6 +27,9 @@ jobs:
       - name: Archive current day
         run: npm run archive-day
 
+      - name: Generate trend analytics
+        run: npm run generate-trends
+
       - name: Reset tasks for new day
         run: npm run reset-day
 
@@ -34,4 +37,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: archive TeamPulse day and reset tasks"
-          file_pattern: README.md data/tasks.json data/analytics.json data/history/*.json
+          file_pattern: README.md data/tasks.json data/analytics.json data/trends.json data/history/*.json

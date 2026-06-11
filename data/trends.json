@@ -1,0 +1,43 @@
+{
+  "weekly": {
+    "tasksCompleted": 3,
+    "tasksCreated": 5,
+    "averageCompletionRate": 60,
+    "bestDay": {
+      "date": "2026-06-11",
+      "completionRate": 60
+    },
+    "worstDay": {
+      "date": "2026-06-11",
+      "completionRate": 60
+    }
+  },
+  "monthly": {
+    "tasksCompleted": 3,
+    "tasksCreated": 5,
+    "averageCompletionRate": 60
+  },
+  "contributorTrends": {
+    "weeklyLeaderboard": [
+      {
+        "username": "kamali-sree",
+        "joinedTasks": 2,
+        "completedTasks": 3
+      }
+    ],
+    "monthlyLeaderboard": [
+      {
+        "username": "kamali-sree",
+        "joinedTasks": 2,
+        "completedTasks": 3
+      }
+    ],
+    "allTimeLeaderboard": [
+      {
+        "username": "kamali-sree",
+        "joinedTasks": 2,
+        "completedTasks": 3
+      }
+    ]
+  }
+}
