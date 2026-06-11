@@ -6,6 +6,7 @@ const DATA_DIR = path.join(ROOT_DIR, "data");
 const TASKS_FILE = path.join(DATA_DIR, "tasks.json");
 const USERS_FILE = path.join(DATA_DIR, "users.json");
 const ANALYTICS_FILE = path.join(DATA_DIR, "analytics.json");
+const HISTORY_DIR = path.join(DATA_DIR, "history");
 const README_FILE = path.join(ROOT_DIR, "README.md");
 
 function readJson(filePath, fallback) {
@@ -57,6 +58,10 @@ function saveAnalytics(data) {
   writeJson(ANALYTICS_FILE, data);
 }
 
+function historyFileForDate(dateValue) {
+  return path.join(HISTORY_DIR, `${dateValue}.json`);
+}
+
 function saveUsers(data) {
   writeJson(USERS_FILE, data);
 }
@@ -78,6 +83,10 @@ function createSlug(value) {
 
 function nowIso() {
   return new Date().toISOString();
+}
+
+function todayDate() {
+  return nowIso().slice(0, 10);
 }
 
 function getArgValue(args, name) {
@@ -181,6 +190,7 @@ function normalizeTasks(data) {
 
 module.exports = {
   ANALYTICS_FILE,
+  HISTORY_DIR,
   README_FILE,
   TASKS_FILE,
   USERS_FILE,
@@ -189,6 +199,7 @@ module.exports = {
   findTask,
   getArgValue,
   getPositionalArgs,
+  historyFileForDate,
   loadAnalytics,
   loadTasks,
   loadUsers,
@@ -198,5 +209,7 @@ module.exports = {
   saveAnalytics,
   saveTasks,
   saveUsers,
-  taskStatus
+  taskStatus,
+  todayDate,
+  writeJson
 };

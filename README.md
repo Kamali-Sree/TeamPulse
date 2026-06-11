@@ -40,6 +40,35 @@ Completion Rate: 60%
 | --- | ---: | ---: |
 | [@kamali-sree](https://github.com/kamali-sree) | 2 | 3 |
 
+## 📅 Yesterday's Summary
+
+Date: 2026-06-11
+
+Tasks Completed: 3
+
+Pending Tasks: 2
+
+Completion Rate: 60%
+
+🏆 Top Contributor
+[@kamali-sree](https://github.com/kamali-sree)
+
+🔥 Most Active Contributor
+[@kamali-sree](https://github.com/kamali-sree)
+
+## 📚 Historical Reports
+
+Total Archived Days: 1
+
+Latest Archive:
+2026-06-11
+
+Best Day:
+2026-06-11 (60%)
+
+Worst Day:
+2026-06-11 (60%)
+
 ## Usage
 
 Create a common task:
@@ -73,16 +102,28 @@ npm run handle-comment -- --issue 1 --body /join --user octocat
 npm run handle-comment -- --issue 1 --body /complete --user octocat
 ```
 
+Regenerate analytics:
+
+```bash
+npm run generate-analytics
+```
+
 Regenerate this dashboard:
 
 ```bash
 npm run update-readme
 ```
 
-Regenerate analytics:
+Archive the current day:
 
 ```bash
-npm run generate-analytics
+npm run archive-day
+```
+
+Reset tasks for a fresh day:
+
+```bash
+npm run reset-day
 ```
 
 ## Project Structure
@@ -92,8 +133,11 @@ npm run generate-analytics
 |-- .github/workflows/update-readme.yml
 |-- .github/workflows/issue-to-task.yml
 |-- .github/workflows/comment-commands.yml
+|-- .github/workflows/daily-reset.yml
 |-- data/
 |   |-- analytics.json
+|   |-- history/
+|   |   `-- YYYY-MM-DD.json
 |   |-- tasks.json
 |   `-- users.json
 |-- scripts/
@@ -104,6 +148,8 @@ npm run generate-analytics
 |   |-- issue_to_task.js
 |   |-- handle_comment_command.js
 |   |-- generate_analytics.js
+|   |-- archive_day.js
+|   |-- reset_tasks.js
 |   `-- update_readme.js
 |-- package.json
 `-- README.md
@@ -111,11 +157,21 @@ npm run generate-analytics
 
 ## Data Model
 
-Tasks live in `data/tasks.json`, users live in `data/users.json`, and daily analytics live in `data/analytics.json`. Each task tracks participants and the users who completed it, which powers the completion rate, top contributor, most active contributor, and contributor leaderboard.
+Tasks live in `data/tasks.json`, users live in `data/users.json`, daily analytics live in `data/analytics.json`, and daily history snapshots live in `data/history/YYYY-MM-DD.json`.
 
 ## Analytics and Contributor Insights
 
 The Daily Analytics section is generated from `data/tasks.json` by `scripts/generate_analytics.js`. It safely handles empty task lists, stores aggregate statistics in `data/analytics.json`, and sorts the contributor leaderboard by completed tasks descending.
+
+## Daily Archives and Reset
+
+TeamPulse stores immutable daily snapshots in `data/history/YYYY-MM-DD.json`. Each snapshot contains the date, daily analytics, top contributors, and the full task list for that day.
+
+`scripts/archive_day.js` creates the history folder automatically, refreshes analytics, and writes today's archive only if it does not already exist. Existing history files are never overwritten or deleted.
+
+`scripts/reset_tasks.js` archives the current day first, clears `data/tasks.json` to `{ "tasks": [] }`, regenerates `data/analytics.json`, and rebuilds this README so the next day starts fresh.
+
+The `.github/workflows/daily-reset.yml` workflow runs every day at 00:00 UTC and can also be tested manually from the GitHub Actions tab with `workflow_dispatch`.
 
 ## GitHub Issue Integration
 
@@ -134,4 +190,4 @@ The `.github/workflows/comment-commands.yml` workflow runs whenever a new issue 
 
 Whenever an issue is created, a contributor joins, or a contributor completes a task, TeamPulse updates `tasks.json`, regenerates `analytics.json`, rebuilds `README.md`, and commits the synchronized dashboard data.
 
-_Last generated: 2026-06-09T19:59:27.056Z_
+_Last generated: 2026-06-11T02:42:18.597Z_
