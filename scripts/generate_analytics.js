@@ -1,6 +1,7 @@
 const {
   loadTasks,
   normalizeTasks,
+  normalizePriority,
   saveAnalytics,
   saveTasks
 } = require("./_utils");
@@ -74,6 +75,26 @@ function findMostActiveContributor(leaderboard) {
   return mostActive.length ? mostActive[0].username : "";
 }
 
+function countTasksByPriority(tasks) {
+  const counts = {
+    criticalTasks: 0,
+    highTasks: 0,
+    mediumTasks: 0,
+    lowTasks: 0
+  };
+
+  for (const task of tasks) {
+    const priority = normalizePriority(task.priority);
+    const key = `${priority}Tasks`;
+
+    if (Object.prototype.hasOwnProperty.call(counts, key)) {
+      counts[key] += 1;
+    }
+  }
+
+  return counts;
+}
+
 function buildAnalytics(tasksData) {
   const tasks = normalizeTasks(tasksData).tasks;
   const totalTasks = tasks.length;
@@ -81,6 +102,7 @@ function buildAnalytics(tasksData) {
   const pendingTasks = totalTasks - completedTasks;
   const contributors = createContributors(tasks);
   const leaderboard = sortLeaderboard(contributors);
+  const priorityCounts = countTasksByPriority(tasks);
 
   // Keep empty repositories safe by avoiding division by zero.
   const completionRate = totalTasks === 0
@@ -95,6 +117,7 @@ function buildAnalytics(tasksData) {
     totalContributors: Object.keys(contributors).length,
     topContributor: findTopContributor(leaderboard),
     mostActiveContributor: findMostActiveContributor(leaderboard),
+    ...priorityCounts,
     contributors
   };
 }
@@ -117,6 +140,7 @@ if (require.main === module) {
 
 module.exports = {
   buildAnalytics,
+  countTasksByPriority,
   createContributors,
   generateAnalytics,
   sortLeaderboard

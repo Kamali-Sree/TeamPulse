@@ -3,6 +3,9 @@
     "tasksCompleted": 3,
     "tasksCreated": 5,
     "averageCompletionRate": 60,
+    "criticalTasksCompleted": 0,
+    "highPriorityCompletionRate": 0,
+    "mostCommonPriority": "medium",
     "bestDay": {
       "date": "2026-06-11",
       "completionRate": 60
@@ -15,7 +18,10 @@
   "monthly": {
     "tasksCompleted": 3,
     "tasksCreated": 5,
-    "averageCompletionRate": 60
+    "averageCompletionRate": 60,
+    "criticalTasksCompleted": 0,
+    "highPriorityCompletionRate": 0,
+    "mostCommonPriority": "medium"
   },
   "contributorTrends": {
     "weeklyLeaderboard": [

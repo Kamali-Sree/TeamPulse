@@ -3,8 +3,11 @@ const path = require("path");
 const {
   HISTORY_DIR,
   defaultTrends,
+  normalizePriority,
   saveTrends
 } = require("./_utils");
+
+const PRIORITIES = ["critical", "high", "medium", "low"];
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -122,7 +125,57 @@ function buildContributorLeaderboard(history) {
   });
 }
 
+function summarizePriorities(history) {
+  const counts = {
+    critical: 0,
+    high: 0,
+    medium: 0,
+    low: 0
+  };
+  let criticalTasksCompleted = 0;
+  let highTasks = 0;
+  let highTasksCompleted = 0;
+
+  for (const snapshot of history) {
+    for (const task of snapshot.tasks || []) {
+      const priority = normalizePriority(task.priority);
+      const isCompleted = task.status === "completed" || (task.completedBy || []).length > 0;
+
+      counts[priority] += 1;
+
+      if (priority === "critical" && isCompleted) {
+        criticalTasksCompleted += 1;
+      }
+
+      if (priority === "high") {
+        highTasks += 1;
+        if (isCompleted) {
+          highTasksCompleted += 1;
+        }
+      }
+    }
+  }
+
+  const mostCommonPriority = PRIORITIES.reduce((best, priority) => {
+    if (counts[priority] > counts[best]) {
+      return priority;
+    }
+
+    return best;
+  }, "medium");
+
+  return {
+    criticalTasksCompleted,
+    highPriorityCompletionRate: highTasks === 0
+      ? 0
+      : Math.round((highTasksCompleted / highTasks) * 100),
+    mostCommonPriority
+  };
+}
+
 function summarizePeriod(history) {
+  const prioritySummary = summarizePriorities(history);
+
   return {
     tasksCompleted: history.reduce((sum, snapshot) => {
       return sum + (snapshot.completedTasks || 0);
@@ -130,7 +183,8 @@ function summarizePeriod(history) {
     tasksCreated: history.reduce((sum, snapshot) => {
       return sum + (snapshot.totalTasks || 0);
     }, 0),
-    averageCompletionRate: averageCompletionRate(history)
+    averageCompletionRate: averageCompletionRate(history),
+    ...prioritySummary
   };
 }
 
@@ -189,5 +243,6 @@ module.exports = {
   buildContributorLeaderboard,
   buildTrends,
   generateTrends,
-  readHistorySnapshots
+  readHistorySnapshots,
+  summarizePriorities
 };

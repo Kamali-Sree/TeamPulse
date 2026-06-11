@@ -9,6 +9,7 @@ const ANALYTICS_FILE = path.join(DATA_DIR, "analytics.json");
 const TRENDS_FILE = path.join(DATA_DIR, "trends.json");
 const HISTORY_DIR = path.join(DATA_DIR, "history");
 const README_FILE = path.join(ROOT_DIR, "README.md");
+const SUPPORTED_PRIORITIES = new Set(["critical", "high", "medium", "low"]);
 
 function readJson(filePath, fallback) {
   if (!fs.existsSync(filePath)) {
@@ -51,6 +52,10 @@ function loadAnalytics() {
     totalContributors: 0,
     topContributor: "",
     mostActiveContributor: "",
+    criticalTasks: 0,
+    highTasks: 0,
+    mediumTasks: 0,
+    lowTasks: 0,
     contributors: {}
   });
 }
@@ -66,12 +71,18 @@ function defaultTrends() {
       tasksCreated: 0,
       averageCompletionRate: 0,
       bestDay: null,
-      worstDay: null
+      worstDay: null,
+      criticalTasksCompleted: 0,
+      highPriorityCompletionRate: 0,
+      mostCommonPriority: "medium"
     },
     monthly: {
       tasksCompleted: 0,
       tasksCreated: 0,
-      averageCompletionRate: 0
+      averageCompletionRate: 0,
+      criticalTasksCompleted: 0,
+      highPriorityCompletionRate: 0,
+      mostCommonPriority: "medium"
     },
     contributorTrends: {
       weeklyLeaderboard: [],
@@ -102,6 +113,19 @@ function normalizeUsername(username) {
     .trim()
     .replace(/^@/, "")
     .toLowerCase();
+}
+
+function normalizePriority(priority) {
+  const normalized = String(priority || "")
+    .trim()
+    .toLowerCase();
+
+  return SUPPORTED_PRIORITIES.has(normalized) ? normalized : "medium";
+}
+
+function formatPriority(priority) {
+  const normalized = normalizePriority(priority);
+  return normalized.charAt(0).toUpperCase() + normalized.slice(1);
 }
 
 function createSlug(value) {
@@ -199,19 +223,23 @@ function normalizeTasks(data) {
   const tasks = (data.tasks || []).map((task) => {
     const participants = Array.from(new Set(task.participants || [])).sort();
     const completedBy = Array.from(new Set(task.completedBy || [])).sort();
+    const priority = normalizePriority(task.priority);
 
     return {
       ...task,
+      priority,
       participants,
       completedBy,
-      status: taskStatus({ ...task, participants, completedBy })
+      status: taskStatus({ ...task, priority, participants, completedBy })
     };
   });
 
   tasks.sort((a, b) => {
     const statusOrder = { pending: 0, in_progress: 1, completed: 2 };
+    const priorityOrder = { critical: 0, high: 1, medium: 2, low: 3 };
     return (
       statusOrder[a.status] - statusOrder[b.status] ||
+      priorityOrder[a.priority] - priorityOrder[b.priority] ||
       a.title.localeCompare(b.title)
     );
   });
@@ -226,10 +254,12 @@ module.exports = {
   TASKS_FILE,
   TRENDS_FILE,
   USERS_FILE,
+  SUPPORTED_PRIORITIES,
   createSlug,
   defaultTrends,
   ensureUser,
   findTask,
+  formatPriority,
   getArgValue,
   getPositionalArgs,
   historyFileForDate,
@@ -238,6 +268,7 @@ module.exports = {
   loadTrends,
   loadUsers,
   normalizeTasks,
+  normalizePriority,
   normalizeUsername,
   nowIso,
   saveAnalytics,

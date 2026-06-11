@@ -24,15 +24,35 @@ Completion Rate: 60%
 
 🔥 Most Active Contributor [@kamali-sree](https://github.com/kamali-sree)
 
+## 🚨 Priority Overview
+
+Critical Tasks: 0
+
+High Tasks: 0
+
+Medium Tasks: 5
+
+Low Tasks: 0
+
+## 📊 Task Distribution
+
+Critical: -
+
+High: -
+
+Medium: █████
+
+Low: -
+
 ## Tasks
 
-| Task | Status | Participants | Completed By |
+| Task | Priority | Status | Participants |
 | --- | --- | --- | --- |
-| Learn FastAPI | Pending | - | - |
-| Learn React | Pending | - | - |
-| Learn Docker | Done | - | [@kamali-sree](https://github.com/kamali-sree) |
-| Learn Kubernetes | Done | [@kamali-sree](https://github.com/kamali-sree) | [@kamali-sree](https://github.com/kamali-sree) |
-| Learn Node.js | Done | [@kamali-sree](https://github.com/kamali-sree) | [@kamali-sree](https://github.com/kamali-sree) |
+| Learn FastAPI | Medium | Pending | - |
+| Learn React | Medium | Pending | - |
+| Learn Docker | Medium | Done | - |
+| Learn Kubernetes | Medium | Done | [@kamali-sree](https://github.com/kamali-sree) |
+| Learn Node.js | Medium | Done | [@kamali-sree](https://github.com/kamali-sree) |
 
 ## Contributor Leaderboard
 
@@ -48,6 +68,12 @@ Tasks Created This Week: 5
 
 Average Weekly Completion Rate: 60%
 
+Critical Tasks Completed This Week: 0
+
+High Priority Completion Rate: 0%
+
+Most Common Priority: Medium
+
 Best Day: 2026-06-11 (60%)
 
 Worst Day: 2026-06-11 (60%)
@@ -59,6 +85,12 @@ Tasks Completed This Month: 3
 Tasks Created This Month: 5
 
 Average Monthly Completion Rate: 60%
+
+Critical Tasks Completed This Month: 0
+
+High Priority Completion Rate: 0%
+
+Most Common Priority: Medium
 
 ## 🏆 Weekly Champions
 
@@ -124,7 +156,7 @@ npm run complete-task -- octocat write-sprint-notes
 Import a GitHub Issue as a task locally:
 
 ```bash
-npm run issue-to-task -- --number 1 --title "Bug: dashboard count is wrong" --body "Pending tasks are miscounted" --user octocat
+npm run issue-to-task -- --number 1 --title "Bug: dashboard count is wrong" --body "Pending tasks are miscounted" --user octocat --labels Critical
 ```
 
 Handle an issue comment command locally:
@@ -197,11 +229,17 @@ npm run reset-day
 
 ## Data Model
 
-Tasks live in `data/tasks.json`, users live in `data/users.json`, daily analytics live in `data/analytics.json`, trend analytics live in `data/trends.json`, and daily history snapshots live in `data/history/YYYY-MM-DD.json`.
+Tasks live in `data/tasks.json`, users live in `data/users.json`, daily analytics live in `data/analytics.json`, trend analytics live in `data/trends.json`, and daily history snapshots live in `data/history/YYYY-MM-DD.json`. Every task has a normalized `priority` value.
 
 ## Analytics and Contributor Insights
 
 The Daily Analytics section is generated from `data/tasks.json` by `scripts/generate_analytics.js`. It safely handles empty task lists, stores aggregate statistics in `data/analytics.json`, and sorts the contributor leaderboard by completed tasks descending.
+
+## Priority Labels
+
+TeamPulse reads GitHub Issue labels when an issue is imported and maps `Critical`, `High`, `Medium`, and `Low` labels to task priorities. Supported priority values are `critical`, `high`, `medium`, and `low`; missing or unknown values are stored as `medium`.
+
+Priorities affect the task table, the Priority Overview, the markdown task distribution bars, and trend analytics such as critical tasks completed, high-priority completion rate, and most common priority.
 
 ## Weekly and Monthly Trends
 
@@ -236,4 +274,4 @@ The `.github/workflows/comment-commands.yml` workflow runs whenever a new issue 
 
 Whenever an issue is created, a contributor joins, or a contributor completes a task, TeamPulse updates `tasks.json`, regenerates `analytics.json`, rebuilds `README.md`, and commits the synchronized dashboard data.
 
-_Last generated: 2026-06-11T16:43:54.388Z_
+_Last generated: 2026-06-11T16:49:42.703Z_

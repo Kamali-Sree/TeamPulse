@@ -3,6 +3,7 @@ const path = require("path");
 const {
   HISTORY_DIR,
   README_FILE,
+  formatPriority,
   loadAnalytics,
   loadTasks,
   loadTrends,
@@ -39,6 +40,10 @@ function escapeMarkdown(value) {
     .replace(/\\/g, "\\\\")
     .replace(/\|/g, "\\|")
     .replace(/\r?\n/g, " ");
+}
+
+function priorityBar(count) {
+  return count > 0 ? "█".repeat(count) : "-";
 }
 
 function readHistorySnapshots() {
@@ -135,9 +140,9 @@ function buildReadme(tasksData, analytics, trends) {
         .map((task) => {
           return [
             escapeMarkdown(task.title),
+            formatPriority(task.priority),
             statusIcon(task.status),
-            formatList(task.participants),
-            formatList(task.completedBy)
+            formatList(task.participants)
           ].join(" | ");
         })
         .map((row) => `| ${row} |`)
@@ -174,9 +179,29 @@ Completion Rate: ${analytics.completionRate}%
 
 🔥 Most Active Contributor ${formatUser(analytics.mostActiveContributor)}
 
+## 🚨 Priority Overview
+
+Critical Tasks: ${analytics.criticalTasks || 0}
+
+High Tasks: ${analytics.highTasks || 0}
+
+Medium Tasks: ${analytics.mediumTasks || 0}
+
+Low Tasks: ${analytics.lowTasks || 0}
+
+## 📊 Task Distribution
+
+Critical: ${priorityBar(analytics.criticalTasks || 0)}
+
+High: ${priorityBar(analytics.highTasks || 0)}
+
+Medium: ${priorityBar(analytics.mediumTasks || 0)}
+
+Low: ${priorityBar(analytics.lowTasks || 0)}
+
 ## Tasks
 
-| Task | Status | Participants | Completed By |
+| Task | Priority | Status | Participants |
 | --- | --- | --- | --- |
 ${taskRows}
 
@@ -194,6 +219,12 @@ Tasks Created This Week: ${weekly.tasksCreated || 0}
 
 Average Weekly Completion Rate: ${weekly.averageCompletionRate || 0}%
 
+Critical Tasks Completed This Week: ${weekly.criticalTasksCompleted || 0}
+
+High Priority Completion Rate: ${weekly.highPriorityCompletionRate || 0}%
+
+Most Common Priority: ${formatPriority(weekly.mostCommonPriority)}
+
 Best Day: ${formatTrendDay(weekly.bestDay)}
 
 Worst Day: ${formatTrendDay(weekly.worstDay)}
@@ -205,6 +236,12 @@ Tasks Completed This Month: ${monthly.tasksCompleted || 0}
 Tasks Created This Month: ${monthly.tasksCreated || 0}
 
 Average Monthly Completion Rate: ${monthly.averageCompletionRate || 0}%
+
+Critical Tasks Completed This Month: ${monthly.criticalTasksCompleted || 0}
+
+High Priority Completion Rate: ${monthly.highPriorityCompletionRate || 0}%
+
+Most Common Priority: ${formatPriority(monthly.mostCommonPriority)}
 
 ## 🏆 Weekly Champions
 
@@ -270,7 +307,7 @@ npm run complete-task -- octocat write-sprint-notes
 Import a GitHub Issue as a task locally:
 
 \`\`\`bash
-npm run issue-to-task -- --number 1 --title "Bug: dashboard count is wrong" --body "Pending tasks are miscounted" --user octocat
+npm run issue-to-task -- --number 1 --title "Bug: dashboard count is wrong" --body "Pending tasks are miscounted" --user octocat --labels Critical
 \`\`\`
 
 Handle an issue comment command locally:
@@ -343,11 +380,17 @@ npm run reset-day
 
 ## Data Model
 
-Tasks live in \`data/tasks.json\`, users live in \`data/users.json\`, daily analytics live in \`data/analytics.json\`, trend analytics live in \`data/trends.json\`, and daily history snapshots live in \`data/history/YYYY-MM-DD.json\`.
+Tasks live in \`data/tasks.json\`, users live in \`data/users.json\`, daily analytics live in \`data/analytics.json\`, trend analytics live in \`data/trends.json\`, and daily history snapshots live in \`data/history/YYYY-MM-DD.json\`. Every task has a normalized \`priority\` value.
 
 ## Analytics and Contributor Insights
 
 The Daily Analytics section is generated from \`data/tasks.json\` by \`scripts/generate_analytics.js\`. It safely handles empty task lists, stores aggregate statistics in \`data/analytics.json\`, and sorts the contributor leaderboard by completed tasks descending.
+
+## Priority Labels
+
+TeamPulse reads GitHub Issue labels when an issue is imported and maps \`Critical\`, \`High\`, \`Medium\`, and \`Low\` labels to task priorities. Supported priority values are \`critical\`, \`high\`, \`medium\`, and \`low\`; missing or unknown values are stored as \`medium\`.
+
+Priorities affect the task table, the Priority Overview, the markdown task distribution bars, and trend analytics such as critical tasks completed, high-priority completion rate, and most common priority.
 
 ## Weekly and Monthly Trends
 

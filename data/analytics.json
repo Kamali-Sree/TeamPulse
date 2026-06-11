@@ -6,6 +6,10 @@
   "totalContributors": 1,
   "topContributor": "kamali-sree",
   "mostActiveContributor": "kamali-sree",
+  "criticalTasks": 0,
+  "highTasks": 0,
+  "mediumTasks": 5,
+  "lowTasks": 0,
   "contributors": {
     "kamali-sree": {
       "joinedTasks": 2,

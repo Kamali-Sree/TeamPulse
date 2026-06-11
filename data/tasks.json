@@ -9,7 +9,8 @@
       "participants": [],
       "completedBy": [],
       "status": "pending",
-      "source": "github_issue"
+      "source": "github_issue",
+      "priority": "medium"
     },
     {
       "id": "task-1780940129242",
@@ -21,7 +22,8 @@
       "dueDate": "",
       "participants": [],
       "completedBy": [],
-      "status": "pending"
+      "status": "pending",
+      "priority": "medium"
     },
     {
       "id": "issue-4",
@@ -34,7 +36,8 @@
         "kamali-sree"
       ],
       "status": "completed",
-      "source": "github_issue"
+      "source": "github_issue",
+      "priority": "medium"
     },
     {
       "id": "issue-5",
@@ -49,7 +52,8 @@
         "kamali-sree"
       ],
       "status": "completed",
-      "source": "github_issue"
+      "source": "github_issue",
+      "priority": "medium"
     },
     {
       "id": "issue-3",
@@ -64,7 +68,8 @@
         "kamali-sree"
       ],
       "status": "completed",
-      "source": "github_issue"
+      "source": "github_issue",
+      "priority": "medium"
     }
   ]
 }

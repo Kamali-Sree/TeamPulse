@@ -4,10 +4,26 @@ const {
   getArgValue,
   loadTasks,
   loadUsers,
+  normalizePriority,
   nowIso,
   saveTasks,
   saveUsers
 } = require("./_utils");
+
+function priorityFromLabels(labels) {
+  const priorityLabels = new Set(["critical", "high", "medium", "low"]);
+
+  for (const label of labels || []) {
+    const name = typeof label === "string" ? label : label && label.name;
+    const normalized = normalizePriority(name);
+
+    if (priorityLabels.has(String(name || "").trim().toLowerCase())) {
+      return normalized;
+    }
+  }
+
+  return "medium";
+}
 
 function readIssueFromEvent(eventPath) {
   if (!eventPath || !fs.existsSync(eventPath)) {
@@ -23,7 +39,8 @@ function readIssueFromEvent(eventPath) {
     number: payload.issue.number,
     title: payload.issue.title,
     body: payload.issue.body || "",
-    username: payload.issue.user && payload.issue.user.login
+    username: payload.issue.user && payload.issue.user.login,
+    labels: payload.issue.labels || []
   };
 }
 
@@ -32,6 +49,10 @@ function readIssueFromArgs(args) {
   const title = getArgValue(args, "title");
   const body = getArgValue(args, "body");
   const username = getArgValue(args, "user");
+  const labels = getArgValue(args, "labels")
+    .split(",")
+    .map((label) => label.trim())
+    .filter(Boolean);
 
   if (!number && !title && !username) {
     return null;
@@ -41,7 +62,8 @@ function readIssueFromArgs(args) {
     number,
     title,
     body,
-    username
+    username,
+    labels
   };
 }
 
@@ -77,6 +99,7 @@ tasksData.tasks.push({
   description: issue.body || "",
   createdBy: user.username,
   createdAt: nowIso(),
+  priority: priorityFromLabels(issue.labels),
   participants: [],
   completedBy: [],
   status: "pending",
