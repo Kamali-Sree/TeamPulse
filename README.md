@@ -218,4 +218,4 @@ TeamPulse supports two GitHub Issue comment commands:
 
 The `.github/workflows/comment-commands.yml` workflow ignores pull request comments, unsupported commands, duplicate joins, duplicate completions, and comments on issues that do not have a matching `issue-N` task.
 
-_Last generated: 2026-06-11T17:50:14.805Z_
+_Last generated: 2026-06-11T18:04:28.657Z_
