@@ -1,0 +1,82 @@
+{
+  "date": "2026-06-12",
+  "totalTasks": 5,
+  "completedTasks": 3,
+  "pendingTasks": 2,
+  "completionRate": 60,
+  "topContributor": "kamali-sree",
+  "mostActiveContributor": "kamali-sree",
+  "tasks": [
+    {
+      "id": "issue-2",
+      "title": "Learn FastAPI",
+      "description": "Need to learn FastAPI CRUD operations.",
+      "createdBy": "kamali-sree",
+      "createdAt": "2026-06-08T18:02:18.179Z",
+      "participants": [],
+      "completedBy": [],
+      "status": "pending",
+      "source": "github_issue",
+      "priority": "medium"
+    },
+    {
+      "id": "task-1780940129242",
+      "title": "Learn React",
+      "slug": "learn-react",
+      "description": "",
+      "createdBy": "",
+      "createdAt": "2026-06-08T17:35:29.242Z",
+      "dueDate": "",
+      "participants": [],
+      "completedBy": [],
+      "status": "pending",
+      "priority": "medium"
+    },
+    {
+      "id": "issue-4",
+      "title": "Learn Docker",
+      "description": "",
+      "createdBy": "kamali-sree",
+      "createdAt": "2026-06-09T19:39:19.025Z",
+      "participants": [],
+      "completedBy": [
+        "kamali-sree"
+      ],
+      "status": "completed",
+      "source": "github_issue",
+      "priority": "medium"
+    },
+    {
+      "id": "issue-5",
+      "title": "Learn Kubernetes",
+      "description": "",
+      "createdBy": "kamali-sree",
+      "createdAt": "2026-06-09T19:42:14.816Z",
+      "participants": [
+        "kamali-sree"
+      ],
+      "completedBy": [
+        "kamali-sree"
+      ],
+      "status": "completed",
+      "source": "github_issue",
+      "priority": "medium"
+    },
+    {
+      "id": "issue-3",
+      "title": "Learn Node.js",
+      "description": "/join",
+      "createdBy": "kamali-sree",
+      "createdAt": "2026-06-08T18:18:53.677Z",
+      "participants": [
+        "kamali-sree"
+      ],
+      "completedBy": [
+        "kamali-sree"
+      ],
+      "status": "completed",
+      "source": "github_issue",
+      "priority": "medium"
+    }
+  ]
+}

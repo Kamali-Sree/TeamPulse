@@ -1,7 +1,7 @@
 {
   "weekly": {
-    "tasksCompleted": 3,
-    "tasksCreated": 5,
+    "tasksCompleted": 6,
+    "tasksCreated": 10,
     "averageCompletionRate": 60,
     "criticalTasksCompleted": 0,
     "highPriorityCompletionRate": 0,
@@ -16,8 +16,8 @@
     }
   },
   "monthly": {
-    "tasksCompleted": 3,
-    "tasksCreated": 5,
+    "tasksCompleted": 6,
+    "tasksCreated": 10,
     "averageCompletionRate": 60,
     "criticalTasksCompleted": 0,
     "highPriorityCompletionRate": 0,
@@ -27,22 +27,22 @@
     "weeklyLeaderboard": [
       {
         "username": "kamali-sree",
-        "joinedTasks": 2,
-        "completedTasks": 3
+        "joinedTasks": 4,
+        "completedTasks": 6
       }
     ],
     "monthlyLeaderboard": [
       {
         "username": "kamali-sree",
-        "joinedTasks": 2,
-        "completedTasks": 3
+        "joinedTasks": 4,
+        "completedTasks": 6
       }
     ],
     "allTimeLeaderboard": [
       {
         "username": "kamali-sree",
-        "joinedTasks": 2,
-        "completedTasks": 3
+        "joinedTasks": 4,
+        "completedTasks": 6
       }
     ]
   }
