@@ -2,7 +2,7 @@
   "weekly": {
     "tasksCompleted": 6,
     "tasksCreated": 10,
-    "averageCompletionRate": 60,
+    "averageCompletionRate": 40,
     "criticalTasksCompleted": 0,
     "highPriorityCompletionRate": 0,
     "mostCommonPriority": "medium",
@@ -11,14 +11,14 @@
       "completionRate": 60
     },
     "worstDay": {
-      "date": "2026-06-11",
-      "completionRate": 60
+      "date": "2026-06-13",
+      "completionRate": 0
     }
   },
   "monthly": {
     "tasksCompleted": 6,
     "tasksCreated": 10,
-    "averageCompletionRate": 60,
+    "averageCompletionRate": 40,
     "criticalTasksCompleted": 0,
     "highPriorityCompletionRate": 0,
     "mostCommonPriority": "medium"
