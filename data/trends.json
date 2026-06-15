@@ -2,7 +2,7 @@
   "weekly": {
     "tasksCompleted": 6,
     "tasksCreated": 10,
-    "averageCompletionRate": 30,
+    "averageCompletionRate": 24,
     "criticalTasksCompleted": 0,
     "highPriorityCompletionRate": 0,
     "mostCommonPriority": "medium",
@@ -18,7 +18,7 @@
   "monthly": {
     "tasksCompleted": 6,
     "tasksCreated": 10,
-    "averageCompletionRate": 30,
+    "averageCompletionRate": 24,
     "criticalTasksCompleted": 0,
     "highPriorityCompletionRate": 0,
     "mostCommonPriority": "medium"
