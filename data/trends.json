@@ -1,13 +1,13 @@
 {
   "weekly": {
-    "tasksCompleted": 6,
-    "tasksCreated": 10,
-    "averageCompletionRate": 17,
+    "tasksCompleted": 3,
+    "tasksCreated": 5,
+    "averageCompletionRate": 9,
     "criticalTasksCompleted": 0,
     "highPriorityCompletionRate": 0,
     "mostCommonPriority": "medium",
     "bestDay": {
-      "date": "2026-06-11",
+      "date": "2026-06-12",
       "completionRate": 60
     },
     "worstDay": {
@@ -18,7 +18,7 @@
   "monthly": {
     "tasksCompleted": 6,
     "tasksCreated": 10,
-    "averageCompletionRate": 17,
+    "averageCompletionRate": 15,
     "criticalTasksCompleted": 0,
     "highPriorityCompletionRate": 0,
     "mostCommonPriority": "medium"
@@ -27,8 +27,8 @@
     "weeklyLeaderboard": [
       {
         "username": "kamali-sree",
-        "joinedTasks": 4,
-        "completedTasks": 6
+        "joinedTasks": 2,
+        "completedTasks": 3
       }
     ],
     "monthlyLeaderboard": [
