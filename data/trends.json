@@ -7,18 +7,18 @@
     "highPriorityCompletionRate": 0,
     "mostCommonPriority": "medium",
     "bestDay": {
-      "date": "2026-06-18",
+      "date": "2026-06-19",
       "completionRate": 0
     },
     "worstDay": {
-      "date": "2026-06-18",
+      "date": "2026-06-19",
       "completionRate": 0
     }
   },
   "monthly": {
     "tasksCompleted": 6,
     "tasksCreated": 10,
-    "averageCompletionRate": 9,
+    "averageCompletionRate": 8,
     "criticalTasksCompleted": 0,
     "highPriorityCompletionRate": 0,
     "mostCommonPriority": "medium"
