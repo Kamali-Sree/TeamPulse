@@ -1,8 +1,8 @@
 {
   "totalTasks": 1,
-  "completedTasks": 0,
-  "pendingTasks": 1,
-  "completionRate": 0,
+  "completedTasks": 1,
+  "pendingTasks": 0,
+  "completionRate": 100,
   "totalContributors": 1,
   "topContributor": "kamali-sree",
   "mostActiveContributor": "kamali-sree",
@@ -13,7 +13,7 @@
   "contributors": {
     "kamali-sree": {
       "joinedTasks": 1,
-      "completedTasks": 0
+      "completedTasks": 1
     }
   }
 }

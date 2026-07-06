@@ -10,8 +10,10 @@
       "participants": [
         "kamali-sree"
       ],
-      "completedBy": [],
-      "status": "pending",
+      "completedBy": [
+        "kamali-sree"
+      ],
+      "status": "completed",
       "source": "github_issue"
     }
   ]
