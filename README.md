@@ -24,10 +24,10 @@ TeamPulse is a GitHub-native task tracking dashboard that turns issues and issue
 
 | Metric | Value |
 | --- | ---: |
-| Total Tasks | 1 |
+| Total Tasks | 2 |
 | Completed Tasks | 1 |
-| Pending Tasks | 0 |
-| Completion Rate | 100% |
+| Pending Tasks | 1 |
+| Completion Rate | 50% |
 
 ---
 
@@ -35,10 +35,10 @@ TeamPulse is a GitHub-native task tracking dashboard that turns issues and issue
 
 | Metric | Value |
 | --- | --- |
-| Total Tasks | 1 |
+| Total Tasks | 2 |
 | Completed Tasks | 1 |
-| Pending Tasks | 0 |
-| Completion Rate | 100% |
+| Pending Tasks | 1 |
+| Completion Rate | 50% |
 | Top Contributor | [@kamali-sree](https://github.com/kamali-sree) |
 | Most Active Contributor | [@kamali-sree](https://github.com/kamali-sree) |
 
@@ -48,7 +48,7 @@ TeamPulse is a GitHub-native task tracking dashboard that turns issues and issue
 
 | Priority | Count |
 | --- | ---: |
-| Critical | 0 |
+| Critical | 1 |
 | High | 0 |
 | Medium | 1 |
 | Low | 0 |
@@ -56,7 +56,7 @@ TeamPulse is a GitHub-native task tracking dashboard that turns issues and issue
 ### 📊 Task Distribution
 
 ```text
-Critical | -
+Critical | █
 High     | -
 Medium   | █
 Low      | -
@@ -68,6 +68,7 @@ Low      | -
 
 | Task | Priority | Status | Participants |
 | --- | --- | --- | --- |
+| complete assignment | Critical | **Pending** | - |
 | go for walk | Medium | **Done** | [@kamali-sree](https://github.com/kamali-sree) |
 
 ---
@@ -214,4 +215,4 @@ TeamPulse supports two GitHub Issue comment commands:
 
 The `.github/workflows/comment-commands.yml` workflow ignores pull request comments, unsupported commands, duplicate joins, duplicate completions, and comments on issues that do not have a matching `issue-N` task.
 
-_Last generated: 2026-07-06T17:28:14.639Z_
+_Last generated: 2026-07-06T17:33:29.025Z_
