@@ -7,7 +7,9 @@
       "createdBy": "kamali-sree",
       "createdAt": "2026-07-06T17:24:16.922Z",
       "priority": "medium",
-      "participants": [],
+      "participants": [
+        "kamali-sree"
+      ],
       "completedBy": [],
       "status": "pending",
       "source": "github_issue"

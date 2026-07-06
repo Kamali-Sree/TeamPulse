@@ -39,8 +39,8 @@ TeamPulse is a GitHub-native task tracking dashboard that turns issues and issue
 | Completed Tasks | 0 |
 | Pending Tasks | 1 |
 | Completion Rate | 0% |
-| Top Contributor | - |
-| Most Active Contributor | - |
+| Top Contributor | [@kamali-sree](https://github.com/kamali-sree) |
+| Most Active Contributor | [@kamali-sree](https://github.com/kamali-sree) |
 
 ---
 
@@ -68,7 +68,7 @@ Low      | -
 
 | Task | Priority | Status | Participants |
 | --- | --- | --- | --- |
-| go for walk | Medium | **Pending** | - |
+| go for walk | Medium | **Pending** | [@kamali-sree](https://github.com/kamali-sree) |
 
 ---
 
@@ -76,7 +76,7 @@ Low      | -
 
 | Contributor | Joined Tasks | Completed Tasks |
 | --- | ---: | ---: |
-| No contributors yet | 0 | 0 |
+| [@kamali-sree](https://github.com/kamali-sree) | 1 | 0 |
 
 ---
 
@@ -214,4 +214,4 @@ TeamPulse supports two GitHub Issue comment commands:
 
 The `.github/workflows/comment-commands.yml` workflow ignores pull request comments, unsupported commands, duplicate joins, duplicate completions, and comments on issues that do not have a matching `issue-N` task.
 
-_Last generated: 2026-07-06T17:24:17.245Z_
+_Last generated: 2026-07-06T17:24:53.755Z_
