@@ -1,14 +1,14 @@
 {
-  "totalTasks": 0,
+  "totalTasks": 1,
   "completedTasks": 0,
-  "pendingTasks": 0,
+  "pendingTasks": 1,
   "completionRate": 0,
   "totalContributors": 0,
   "topContributor": "",
   "mostActiveContributor": "",
   "criticalTasks": 0,
   "highTasks": 0,
-  "mediumTasks": 0,
+  "mediumTasks": 1,
   "lowTasks": 0,
   "contributors": {}
 }
