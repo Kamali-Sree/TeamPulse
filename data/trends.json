@@ -1,42 +1,48 @@
 {
   "weekly": {
-    "tasksCompleted": 0,
-    "tasksCreated": 0,
-    "averageCompletionRate": 0,
+    "tasksCompleted": 1,
+    "tasksCreated": 2,
+    "averageCompletionRate": 7,
     "criticalTasksCompleted": 0,
     "highPriorityCompletionRate": 0,
     "mostCommonPriority": "medium",
     "bestDay": {
-      "date": "2026-06-30",
-      "completionRate": 0
+      "date": "2026-07-07",
+      "completionRate": 50
     },
     "worstDay": {
-      "date": "2026-06-30",
+      "date": "2026-07-01",
       "completionRate": 0
     }
   },
   "monthly": {
-    "tasksCompleted": 6,
-    "tasksCreated": 10,
-    "averageCompletionRate": 5,
+    "tasksCompleted": 7,
+    "tasksCreated": 12,
+    "averageCompletionRate": 6,
     "criticalTasksCompleted": 0,
     "highPriorityCompletionRate": 0,
     "mostCommonPriority": "medium"
   },
   "contributorTrends": {
-    "weeklyLeaderboard": [],
+    "weeklyLeaderboard": [
+      {
+        "username": "kamali-sree",
+        "joinedTasks": 1,
+        "completedTasks": 1
+      }
+    ],
     "monthlyLeaderboard": [
       {
         "username": "kamali-sree",
-        "joinedTasks": 4,
-        "completedTasks": 6
+        "joinedTasks": 5,
+        "completedTasks": 7
       }
     ],
     "allTimeLeaderboard": [
       {
         "username": "kamali-sree",
-        "joinedTasks": 4,
-        "completedTasks": 6
+        "joinedTasks": 5,
+        "completedTasks": 7
       }
     ]
   }

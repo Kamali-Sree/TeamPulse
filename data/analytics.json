@@ -1,19 +1,14 @@
 {
-  "totalTasks": 2,
-  "completedTasks": 1,
-  "pendingTasks": 1,
-  "completionRate": 50,
-  "totalContributors": 1,
-  "topContributor": "kamali-sree",
-  "mostActiveContributor": "kamali-sree",
-  "criticalTasks": 1,
+  "totalTasks": 0,
+  "completedTasks": 0,
+  "pendingTasks": 0,
+  "completionRate": 0,
+  "totalContributors": 0,
+  "topContributor": "",
+  "mostActiveContributor": "",
+  "criticalTasks": 0,
   "highTasks": 0,
-  "mediumTasks": 1,
+  "mediumTasks": 0,
   "lowTasks": 0,
-  "contributors": {
-    "kamali-sree": {
-      "joinedTasks": 1,
-      "completedTasks": 1
-    }
-  }
+  "contributors": {}
 }

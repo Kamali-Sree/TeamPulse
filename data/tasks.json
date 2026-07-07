@@ -1,32 +1,3 @@
 {
-  "tasks": [
-    {
-      "id": "issue-7",
-      "title": "complete assignment",
-      "description": "",
-      "createdBy": "kamali-sree",
-      "createdAt": "2026-07-06T17:33:28.692Z",
-      "priority": "critical",
-      "participants": [],
-      "completedBy": [],
-      "status": "pending",
-      "source": "github_issue"
-    },
-    {
-      "id": "issue-6",
-      "title": "go for walk",
-      "description": "high",
-      "createdBy": "kamali-sree",
-      "createdAt": "2026-07-06T17:24:16.922Z",
-      "priority": "medium",
-      "participants": [
-        "kamali-sree"
-      ],
-      "completedBy": [
-        "kamali-sree"
-      ],
-      "status": "completed",
-      "source": "github_issue"
-    }
-  ]
+  "tasks": []
 }
