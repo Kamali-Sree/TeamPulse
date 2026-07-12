@@ -11,14 +11,14 @@
       "completionRate": 50
     },
     "worstDay": {
-      "date": "2026-07-05",
+      "date": "2026-07-06",
       "completionRate": 0
     }
   },
   "monthly": {
-    "tasksCompleted": 4,
-    "tasksCreated": 7,
-    "averageCompletionRate": 4,
+    "tasksCompleted": 1,
+    "tasksCreated": 2,
+    "averageCompletionRate": 2,
     "criticalTasksCompleted": 0,
     "highPriorityCompletionRate": 0,
     "mostCommonPriority": "medium"
@@ -34,8 +34,8 @@
     "monthlyLeaderboard": [
       {
         "username": "kamali-sree",
-        "joinedTasks": 3,
-        "completedTasks": 4
+        "joinedTasks": 1,
+        "completedTasks": 1
       }
     ],
     "allTimeLeaderboard": [
