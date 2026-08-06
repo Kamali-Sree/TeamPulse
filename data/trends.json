@@ -7,31 +7,25 @@
     "highPriorityCompletionRate": 0,
     "mostCommonPriority": "medium",
     "bestDay": {
-      "date": "2026-07-30",
+      "date": "2026-07-31",
       "completionRate": 0
     },
     "worstDay": {
-      "date": "2026-07-30",
+      "date": "2026-07-31",
       "completionRate": 0
     }
   },
   "monthly": {
-    "tasksCompleted": 1,
-    "tasksCreated": 2,
-    "averageCompletionRate": 2,
+    "tasksCompleted": 0,
+    "tasksCreated": 0,
+    "averageCompletionRate": 0,
     "criticalTasksCompleted": 0,
     "highPriorityCompletionRate": 0,
     "mostCommonPriority": "medium"
   },
   "contributorTrends": {
     "weeklyLeaderboard": [],
-    "monthlyLeaderboard": [
-      {
-        "username": "kamali-sree",
-        "joinedTasks": 1,
-        "completedTasks": 1
-      }
-    ],
+    "monthlyLeaderboard": [],
     "allTimeLeaderboard": [
       {
         "username": "kamali-sree",
